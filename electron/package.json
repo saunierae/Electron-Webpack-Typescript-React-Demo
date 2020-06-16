@@ -1,0 +1,56 @@
+{
+  "name": "final",
+  "version": "0.1.0",
+  "description": "Application for React, Webpack, Typescript, Electron and Babel.",
+  "keywords": [
+    "react",
+    "webpack",
+    "typescript",
+    "babel",
+    "sass",
+    "electron",
+    "starter",
+    "boilerplate"
+  ],
+  "author": "Saunie Burke",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saunierae/School/SDEV435/Final.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saunierae/School/SDEV435/Final/Issues"
+  },
+  "main": "src/electron.tsx",
+  "homepage": "./",
+  "build": {
+    "productName": "Electron Test",
+    "files": [
+      "build/**/*"
+    ],
+    "extraMetadata": {
+      "main": "build/electron.tsx"
+    }
+  },
+  "scripts": {
+    "launch-electron": "node_modules/electron/dist/electron.exe dist/main.js",
+    "build": "webpack -p --config=configs/webpack/prod.js",
+    "lint": "tslint './src/**/*.ts*' --format stylish --project . --force",
+    "electron-pack": "electron-builder"
+  },
+  "devDependencies": {
+    "@electron/typescript-definitions": "8.7.4",
+    "@types/node": "^14.0.6",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.1.0",
+    "electron": "^9.0.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  }
+}

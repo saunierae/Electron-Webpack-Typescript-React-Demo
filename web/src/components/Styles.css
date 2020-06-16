@@ -1,0 +1,15 @@
+
+.list {
+    list-style-type: none;
+    background-color: grey;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+	width: 500px;
+	min-height: 50px;
+	height: auto;
+}
+
+.label-example{
+    list-style-type: none;
+}
