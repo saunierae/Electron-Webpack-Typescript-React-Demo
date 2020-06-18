@@ -94,7 +94,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="text"
                     checked={this.state.selectedOption === "text"}
                     onChange={this.handleOptionChange}
@@ -107,7 +107,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="radiobtn"
                     checked={this.state.selectedOption === "radiobtn"}
                     onChange={this.handleOptionChange}
@@ -120,7 +120,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="checkbox"
                     checked={this.state.selectedOption === "checkbox"}
                     onChange={this.handleOptionChange}
@@ -133,7 +133,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="timestamp"
                     checked={this.state.selectedOption === "timestamp"}
                     onChange={this.handleOptionChange}
@@ -146,7 +146,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="total"
                     checked={this.state.selectedOption === "total"}
                     onChange={this.handleOptionChange}
@@ -159,7 +159,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 <label>
                   <input
                     type="radio"
-                    name="react-tips"
+                    name="group-2"
                     value="todo"
                     checked={this.state.selectedOption === "todo"}
                     onChange={this.handleOptionChange}

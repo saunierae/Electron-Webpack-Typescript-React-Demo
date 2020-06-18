@@ -6,6 +6,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  target: "electron-renderer",
   context: resolve(__dirname, '../../src'),
   module: {
     rules: [

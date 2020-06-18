@@ -7,11 +7,8 @@ import {render} from "react-dom";
 import {ToDoList} from "./components/ToDo";
 import Tutorial from "./components/Tutorial";
 
-const electron = require('electron')
-
-const {app, BrowserWindow, ipcMain: ipc } = electron
-
 const rootEl = document.getElementById("root");
+
 render(
     // <App/>,
     <>    

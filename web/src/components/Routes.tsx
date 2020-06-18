@@ -1,5 +1,6 @@
 // import * as React from "react";
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import { BrowserRouter, Switch, Route } from 'react-router-dom';
+// import { ToDoList } from "./ToDo";
 
 // // import CurrentJournals from "./CurrentJournals/CurrentJournals";
 // // import SelectJournalTemplate from "./SelectJournalTemplate/SelectJournalTemplate";
@@ -10,7 +11,7 @@
 //           <BrowserRouter>
 //             <Route 
 //               path='/'
-//               render={ props => <MyComponent {...props} />}
+//               render={ props => <ToDoList {...props} />}
 //             />
 //           </BrowserRouter>
 //         )

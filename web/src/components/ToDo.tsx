@@ -1,18 +1,7 @@
 import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
-
-const electron = require('electron')
-
-const { ipcRendrer: ipc } = electron
-
-window.addEventListener('DOMContentLoaded', _ => {
-  const saveFile = document.getElementById('saveList')
-})
-
-window.addEventListener('click', _ => {
-  ipc.send('saveList')
-})
+import {ipcRenderer} from "electron"; 
 
 type ListItemData = {key: number, val: string}
 type ToDoListState = {list: ListItemData[], userInput: string}
@@ -73,14 +62,15 @@ export class ToDoList extends React.Component <{},ToDoListState>{
             value={this.state.userInput}
             type="text"
             />
-          <button onClick={ () => this.addToList(this.state.userInput) }>Add to List</button>
+          <button onClick={ this.onAddListItem}>Add to List</button>
           <ul className="list" style={{flexDirection: 'row'}}>
             {this.state.list.map( (listItem) => <ListItem dataKey={listItem.key} val={listItem.val} key={listItem.key} deleteItem={this.deleteItem}/>)}
           </ul>
           {/* <button className="saveList" onClick={saveList}>Save</button> */}
           </div>
       );
-    }
+    } 
+    private onAddListItem = () => {this.addToList(this.state.userInput); ipcRenderer.send("save")} 
   }
 
 type ListItemProps = ListItemData& {deleteItem: (key: number) => void, dataKey: number}

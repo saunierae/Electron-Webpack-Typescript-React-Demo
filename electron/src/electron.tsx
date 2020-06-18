@@ -1,10 +1,11 @@
-// Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
+import FS from "fs"; 
+import {app, BrowserWindow, IpcMain, ipcMain} from "electron"
+import * as path from "path"
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: typeof BrowserWindow | undefined;
+let mainWindow: BrowserWindow | null = null;
 
 console.log("Hello");
 function createWindow () {
@@ -44,8 +45,12 @@ function createWindow () {
     // Emitted when the window is ready to be shown
     // This helps in showing the window gracefully.
     mainWindow.once('ready-to-show', () => {
-        mainWindow.show()
+        if(mainWindow != null) {
+            mainWindow.show()
+        }
     });
+
+    ipcMain.on("save", () => {console.log("Added file")})
 }
 
 // This method will be called when Electron has finished
