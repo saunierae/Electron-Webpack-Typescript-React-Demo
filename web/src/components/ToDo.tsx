@@ -66,11 +66,20 @@ export class ToDoList extends React.Component <{},ToDoListState>{
           <ul className="list" style={{flexDirection: 'row'}}>
             {this.state.list.map( (listItem) => <ListItem dataKey={listItem.key} val={listItem.val} key={listItem.key} deleteItem={this.deleteItem}/>)}
           </ul>
-          {/* <button className="saveList" onClick={saveList}>Save</button> */}
+          <button className="saveList" onClick={this.saveList}>Save</button>
           </div>
       );
     } 
-    private onAddListItem = () => {this.addToList(this.state.userInput); ipcRenderer.send("save")} 
+    private onAddListItem = () => {
+      this.addToList(this.state.userInput);
+    }
+
+    private saveList = () => {
+      console.log(this.state.list);
+      var sendString = JSON.stringify(this.state.list);
+      console.log(sendString);      
+      ipcRenderer.send("save", sendString);
+    }
   }
 
 type ListItemProps = ListItemData& {deleteItem: (key: number) => void, dataKey: number}

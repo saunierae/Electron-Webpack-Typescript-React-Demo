@@ -1,7 +1,6 @@
-import FS from "fs"; 
-import {app, BrowserWindow, IpcMain, ipcMain} from "electron"
-import * as path from "path"
-
+import fs from "fs"; 
+import {app, BrowserWindow, Dialog, IpcMain, ipcMain} from "electron";
+import * as path from "path";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -50,8 +49,44 @@ function createWindow () {
         }
     });
 
-    ipcMain.on("save", () => {console.log("Added file")})
-}
+    ipcMain.on("save", (event, arg) => {
+        try {
+            //fs.writeFileSync('myfile.txt', 'the text to write in the file', 'utf-8'); 
+            fs.writeFileSync('toDo.json', arg, 'utf-8');
+    }
+    catch(e) { alert('Failed to save the file !'); 
+    }})
+
+    //let filepath = "C:\Users\Saunie\Documents\GitHub\School\SDEV435\Final\electron\myfile.txt";
+    let fileName = 'toDo.json'
+
+    ipcMain.on("read", (event, args) => {
+        // dialog.showOpenDialog((fileNames) => {
+        //     // fileNames is an array that contains all the selected
+        //     if(fileNames === undefined){
+        //         console.log("No file selected");
+        //         return;
+        //     }
+        //var returnData;
+        try{
+            fs.readFile(fileName, 'utf-8', (err, data) => {
+                // if(err){
+                //     alert("An error ocurred reading the file :" + err.message);
+                //     return;
+                // }
+                //returnData = data;
+                event.reply('reply', data)
+                // Change how to handle the file content
+                console.log("The file content is : " + data);
+            });
+
+            
+        }
+        catch(e)
+        {
+            alert('Failed to read the file; exception: ' + e)
+        }
+        })}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
