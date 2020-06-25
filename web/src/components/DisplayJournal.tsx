@@ -1,43 +1,65 @@
-// import * as React from "react";
-// import { useCallback } from "react";
-// import './Styles.css';
-// import {ipcRenderer} from "electron"; 
-
-// export class DisplayJournal extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                  <button onClick={ this.display}>Add to List</button>
-//             </div>
-//         )
-//     }
-//     private display = () => ipcRenderer.on("read","mytext.txt");
-// }
-
 import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
-import {ipcRenderer} from "electron";
+import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
+import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-router-dom";
+import ToDoList, { ListItemData } from "./ToDo";
 
-export class DisplayJournal extends React.Component {
+type DisplayJournalState = {items: ListItemData[]}
+
+
+export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
+    private nextID: number = 0;
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             items: []     
+        }
+    }
+    
 
     buildList (args) {
         console.log(args);
     }
+    render() {
+        return (
+            <div>
+                <h1>Display Journal</h1>
+                    {/* <button onClick={ this.openWin}>Open new window</button> */}
+                    <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
 
-        render() {
-            return (
-                <div>
-                    <h1>Display Journal</h1>
-                     <button onClick={ this.display}>Add to List</button>
+                    <div>
+                    <button className="saveList" onClick={this.saveList}>Save</button>
+                    <button className="loadList" onClick={this.loadList}>load</button>
                 </div>
-            )
-        }
+            </div>
+        )
+    }
 
-        private display = () => {
+        private loadList = () => {
             var data = ipcRenderer.sendSync('read')
             console.log("private display: " + data)
-            this.buildList(data);
+            this.setState({items: JSON.parse(data)})
         };
+
+        private saveList = () => {
+            var sendString = JSON.stringify(this.state.items);
+            console.log(sendString);      
+            ipcRenderer.send("save", sendString);
+          }
+
+          addToList = (val: string) => {
+                this.setState({
+                    items: [...this.state.items, {val, key:this.nextID++}]
+                })
+          }
+
+          deleteItem = (key: number) => {
+                this.setState({
+                    items: this.state.items.filter(item => item.key !== key)  
+                })
+          }
     }
 

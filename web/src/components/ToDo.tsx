@@ -1,21 +1,21 @@
 import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
-import {ipcRenderer} from "electron"; 
+import {ipcRenderer} from "electron";
+import PropTypes from 'prop-types'
+import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-router-dom";
 
-type ListItemData = {key: number, val: string}
-type ToDoListState = {list: ListItemData[], userInput: string}
+export type ListItemData = {key: number, val: string}
+type ToDoListState = {userInput: string}
+type ToDoListProps = {list: ListItemData[], addToList: (input: string) => void, deleteItem: (key: number) => void}
 
-export class ToDoList extends React.Component <{},ToDoListState>{
-  private nextID: number;
+export class ToDoList extends React.Component <ToDoListProps,ToDoListState>{
 
-    constructor(props: {}) {
+    constructor(props: ToDoListProps) {
   
       super(props);
-       this.nextID = 0;
         this.state = {
-        userInput: '',
-        list: []
+        userInput: ''
       }
     }
   
@@ -27,31 +27,13 @@ export class ToDoList extends React.Component <{},ToDoListState>{
   
     addToList(input: string) {
       if(input !== "") {
-        let listArray = this.state.list
-        const listItem = {key: this.nextID, val: input} 
-        this.nextID++
-
-        this.setState( { 
-          list: [...this.state.list,listItem], 
-          userInput: '' 
-        })
+        this.props.addToList(input)
       }
     }
 
     deleteItem = (key: number) => {
-      const filteredItems= this.state.list.filter(item =>
-        item.key!==key);
-      this.setState({
-        list: filteredItems
-      }) 
+      this.props.deleteItem(key)
     }
-
-    // saveList = () {
-    //   //check if file exist
-    //   //create file if not
-    //   //JSON.stringify(list)
-    //  {this.state.list.map( (listItemData)}
-    // }
 
     render() {
       return (
@@ -64,21 +46,17 @@ export class ToDoList extends React.Component <{},ToDoListState>{
             />
           <button onClick={ this.onAddListItem}>Add to List</button>
           <ul className="list" style={{flexDirection: 'row'}}>
-            {this.state.list.map( (listItem) => <ListItem dataKey={listItem.key} val={listItem.val} key={listItem.key} deleteItem={this.deleteItem}/>)}
+            {this.props.list.map( (listItem) => 
+              <ListItem dataKey={listItem.key} 
+              val={listItem.val} key={listItem.key} 
+              deleteItem={this.deleteItem}/>
+            )}
           </ul>
-          <button className="saveList" onClick={this.saveList}>Save</button>
           </div>
       );
     } 
     private onAddListItem = () => {
       this.addToList(this.state.userInput);
-    }
-
-    private saveList = () => {
-      console.log(this.state.list);
-      var sendString = JSON.stringify(this.state.list);
-      console.log(sendString);      
-      ipcRenderer.send("save", sendString);
     }
   }
 
@@ -97,3 +75,5 @@ const ListItem = (props: ListItemProps) => {
     </>
   )
 }
+
+export default ToDoList;

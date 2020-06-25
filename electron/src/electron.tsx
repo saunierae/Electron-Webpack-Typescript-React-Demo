@@ -40,14 +40,14 @@ function createWindow () {
         // when you should delete the corresponding element.
         mainWindow = null
     });
-
+    mainWindow.show();
     // Emitted when the window is ready to be shown
     // This helps in showing the window gracefully.
-    mainWindow.once('ready-to-show', () => {
-        if(mainWindow != null) {
-            mainWindow.show()
-        }
-    });
+    // mainWindow.once('ready-to-show', () => {
+    //     if(mainWindow != null) {
+    //         mainWindow.show()
+    //     }
+    // });
 
     ipcMain.on("save", (event, arg) => {
         try {
@@ -75,7 +75,7 @@ function createWindow () {
                 //     return;
                 // }
                 //returnData = data;
-                event.reply('reply', data)
+                event.returnValue=data;
                 // Change how to handle the file content
                 console.log("The file content is : " + data);
             });
