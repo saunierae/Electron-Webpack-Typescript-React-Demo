@@ -30,26 +30,16 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
         }
       }
 
-      handleOptionChange = changeEvent => {
+      handleOptionChange = (changeEvent) => {
         this.setState({
           selectedOption: changeEvent.target.value
         });
       };
 
-      // FIXME - remove
-      handleOptionChange2 = changeEvent => {
-        console.log(this);
-      };
-
-      handleFormSubmit = formSubmitEvent => {
+      handleFormSubmit = (formSubmitEvent) => {
         formSubmitEvent.preventDefault();
     
         console.log("You have submitted:", this.state.selectedOption);
-      };
-
-      // FIXME - remove
-      handleFormSubmit2 = formSubmitEvent => {
-        formSubmitEvent.preventDefault();
       };
 
     render() {
@@ -58,7 +48,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
           <h1>Create Section for Journal</h1>  
           <p></p>
           <div>
-          <form onSubmit={this.handleFormSubmit} id="1">
+          <form onSubmit={this.handleFormSubmit}>
               <div className="form-check1">
                 <label>
                   <input
@@ -103,7 +93,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
           <p>Select the type of input that you would like to add:</p>
           <div>
              { /* FIXME - set handler back */ }
-             <form onSubmit={this.handleFormSubmit2} id="2">
+             <form onSubmit={this.handleFormSubmit} id="2">
               <div className="form-check">
                 <label>
                   <input
@@ -111,7 +101,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="text"
                     checked={this.state.selectedOption === "text"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   Text
@@ -124,7 +114,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="radiobtn"
                     checked={this.state.selectedOption === "radiobtn"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   Radio Button
@@ -137,7 +127,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="checkbox"
                     checked={this.state.selectedOption === "checkbox"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   Check Box
@@ -150,7 +140,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="timestamp"
                     checked={this.state.selectedOption === "timestamp"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   Time Stamp
@@ -163,7 +153,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="total"
                     checked={this.state.selectedOption === "total"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   Total Sum and Input Boxes
@@ -176,7 +166,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     name="group-2"
                     value="todo"
                     checked={this.state.selectedOption === "todo"}
-                    onChange={this.handleOptionChange2}
+                    onChange={this.handleOptionChange}
                     className="form-check-input"
                   />
                   To Do List

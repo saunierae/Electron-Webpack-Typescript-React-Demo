@@ -6,10 +6,15 @@ import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-ro
 import ToDoList, { ListItemData } from "./ToDo";
 
 type DisplayJournalState = {items: ListItemData[]}
+let name = 'displayJournal';
+let date = new Date();
+let extension = '.json';
+let newName = name.concat(date.toDateString(),extension); 
 
 
 export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
     private nextID: number = 0;
+    private fileName = newName
 
     constructor(props) {
         super(props)
@@ -32,14 +37,14 @@ export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
 
                     <div>
                     <button className="saveList" onClick={this.saveList}>Save</button>
-                    <button className="loadList" onClick={this.loadList}>load</button>
+                    <button className="loadList" onClick={this.loadList}>Load</button>
                 </div>
             </div>
         )
     }
 
         private loadList = () => {
-            var data = ipcRenderer.sendSync('read')
+            var data = ipcRenderer.sendSync('read', this.fileName)
             console.log("private display: " + data)
             this.setState({items: JSON.parse(data)})
         };
@@ -47,7 +52,7 @@ export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
         private saveList = () => {
             var sendString = JSON.stringify(this.state.items);
             console.log(sendString);      
-            ipcRenderer.send("save", sendString);
+            ipcRenderer.send("save", [this.fileName ,sendString]);
           }
 
           addToList = (val: string) => {

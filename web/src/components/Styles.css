@@ -1,13 +1,16 @@
 
 .list {
     list-style-type: none;
-    background-color: grey;
-    color: white;
+    flex-direction: row;
     padding: 20px;
     display: inline-block;
-	width: 500px;
-	min-height: 50px;
-	height: auto;
+        width: 500px;
+        min-height: 50px;
+        height: auto;
+}
+
+.input {
+    position: fixed;
 }
 
 .label-example{

@@ -3,15 +3,16 @@ import { useCallback } from "react";
 import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import ToDoList, { ListItemData } from "./ToDo";
+import { fileURLToPath } from "url";
 
-type CreateQuestionState = {items: ListItemData[]}
-let name = 'createQuestion';
+type TotalSumState = {items: ListItemData[]}
+let name = 'totalSum';
 let date = new Date();
 let extension = '.json';
 let newName = name.concat(date.toDateString(),extension); 
 
 
-export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
+export class TotalSum extends React.Component <{}, TotalSumState> {
     private nextID: number = 0;
     private fileName = newName;
 
@@ -30,7 +31,7 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
     render() {
         return (
             <div>
-                <h1>Label checkbox / radio buttons for section</h1>
+                <h1>Label Total Sum for Section</h1>
                     {/* <button onClick={ this.openWin}>Open new window</button> */}
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
 

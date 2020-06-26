@@ -1,83 +1,68 @@
 import * as React from "react";
 import { useCallback } from "react";
+import './Styles.css';
+import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
+import ToDoList, { ListItemData } from "./ToDo";
 
-type LabelItemData = {key: number, val: string}
-type ListState = {list: LabelItemData[], userInput: string}
+type CreateLabelState = {items: ListItemData[]}
+let name = 'createLabel';
+let date = new Date();
+let extension = '.json';
+let newName = name.concat(date.toDateString(),extension); 
 
-export class CreateLabel extends React.Component <{},ListState>{
-  private nextID: number;
 
-  constructor(props: {}) {
+export class CreateLabel extends React.Component <{}, CreateLabelState> {
+    private nextID: number = 0;
+    private fileName = newName;
 
-    super(props);
-     this.nextID = 0;
-      this.state = {
-      userInput: '',
-      list: []
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             items: []     
+        }
     }
-  }
+    
 
-  changeUserInput(input: string) {
-    this.setState({
-      userInput: input
-    });
-  }
+    buildList (args) {
+        console.log(args);
+    }
+    render() {
+        return (
+            <div>
+                <h1>Create Label</h1>
+                    {/* <button onClick={ this.openWin}>Open new window</button> */}
+                    <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
 
-  addToList(input: string) {
-    if(input !== "") {
-    let listArray = this.state.list
-    const listItem = {key: this.nextID, val: input} 
-    this.nextID++
-
-    this.setState( { 
-      list: [...this.state.list,listItem], 
-      userInput: '' 
-    })}
-  }
-
-  deleteItem = (key: number) => {
-    const filteredItems= this.state.list.filter(item =>
-      item.key!==key);
-    this.setState({
-      list: filteredItems
-    }) 
-  }
-
-  render() {
-    return (
-      <div className="create-label-list-main">
-        <h1>Create Label</h1>
-        <p/>
-          <p>Please enter the label items for each of the labels created starting in order with the first label </p>
-          <div>
-            <input
-              onChange={ (e) => this.changeUserInput(e.target.value) }
-              value={this.state.userInput}
-              type="text"
-              />
-              <button onClick={ () => this.addToList(this.state.userInput) }>enter</button>
+                    <div>
+                    <button className="saveList" onClick={this.saveList}>Complete</button>
+                    <button className="loadList" onClick={this.loadList}>Load Preview</button>
+                </div>
             </div>
-          <ul className="list">
-            {this.state.list.map( (listItem) => <LabelItem dataKey={listItem.key} val={listItem.val} key={listItem.key} deleteItem={this.deleteItem}/>)}
-          </ul>
-          {/* <button onClick={saveList}>Save</button> */}
-          </div>
-    );
-  }
-}
+        )
+    }
 
-type LabelItemProps = LabelItemData& {deleteItem: (key: number) => void, dataKey: number}
-const LabelItem = (props: LabelItemProps) => {
-  const onClick = useCallback(
-    () => {
-      props.deleteItem(props.dataKey)
-    },
-    [props],
-  )
-  return (
-    <>
-      <li>{props.val}</li>
-      <button onClick={onClick}>Delete</button>
-    </>
-  )
-}
+        private loadList = () => {
+            var data = ipcRenderer.sendSync('read', this.fileName)
+            console.log("private display: " + data)
+            this.setState({items: JSON.parse(data)})
+        };
+
+        private saveList = () => {
+            var sendString = JSON.stringify(this.state.items);
+            console.log(sendString);      
+            ipcRenderer.send("save", [this.fileName ,sendString]);
+          }
+
+          addToList = (val: string) => {
+                this.setState({
+                    items: [...this.state.items, {val, key:this.nextID++}]
+                })
+          }
+
+          deleteItem = (key: number) => {
+                this.setState({
+                    items: this.state.items.filter(item => item.key !== key)  
+                })
+          }
+    }

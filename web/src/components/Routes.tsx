@@ -2,13 +2,14 @@ import * as React from "react";
 import { HashRouter, Route, NavLink as HashLink, Link, Switch } from "react-router-dom";
 import { ToDoList } from "./ToDo";
 import { CreateSection } from "./CreateSection";
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink  } from 'reactstrap';
 import { CreateLabel } from "./CreateLabel";
 import { DisplayJournal } from "./DisplayJournal";
 import { App } from "./App";
 import CreateJournalTemplate from "./CreateJournalTemplate";
 import { CreateQuestion } from "./CreateQuestion";
 import Tutorial from "./Tutorial";
+import { LabelCheck } from "./LabelCheck";
+import { TotalSum } from "./TotalSumLabel";
 
 export class Routes extends React.Component {
 
@@ -22,6 +23,8 @@ export class Routes extends React.Component {
           <Link to="/CreateSection" className="button">Create Section</Link>
           <Link to="/CreateQuestion" className="button">Create Question</Link>
           <Link to="/Tutorial" className="button">Tutorial</Link>
+          <Link to="/LabelCheck" className="button">Label checkbox</Link>
+          <Link to="/TotalSum" className="button">Total Sum Label</Link>
               <Switch>
                 <Route path="/DisplayJournal"><DisplayJournal/></Route>
                 <Route path="/CreateJournalTemplate"><CreateJournalTemplate/></Route>
@@ -29,6 +32,8 @@ export class Routes extends React.Component {
                 <Route path="/CreateSection"><CreateSection/></Route>
                 <Route path="/CreateQuestion"><CreateQuestion/></Route>
                 <Route path="/Tutorial"><Tutorial/></Route>
+                <Route path="/LabelCheck"><LabelCheck/></Route>
+                <Route path="/TotalSum"><TotalSum/></Route>
               </Switch>
       </HashRouter>
       </div>

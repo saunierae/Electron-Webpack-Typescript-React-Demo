@@ -40,6 +40,7 @@ function createWindow () {
         // when you should delete the corresponding element.
         mainWindow = null
     });
+
     mainWindow.show();
     // Emitted when the window is ready to be shown
     // This helps in showing the window gracefully.
@@ -49,16 +50,16 @@ function createWindow () {
     //     }
     // });
 
-    ipcMain.on("save", (event, arg) => {
+    ipcMain.on("save", (event, args) => {
         try {
             //fs.writeFileSync('myfile.txt', 'the text to write in the file', 'utf-8'); 
-            fs.writeFileSync('toDo.json', arg, 'utf-8');
+            fs.writeFileSync(args[0], args[1], 'utf-8');
     }
     catch(e) { alert('Failed to save the file !'); 
     }})
 
     //let filepath = "C:\Users\Saunie\Documents\GitHub\School\SDEV435\Final\electron\myfile.txt";
-    let fileName = 'toDo.json'
+    //let fileName = 'toDo.json'
 
     ipcMain.on("read", (event, args) => {
         // dialog.showOpenDialog((fileNames) => {
@@ -68,6 +69,8 @@ function createWindow () {
         //         return;
         //     }
         //var returnData;
+        let fileName = args;
+        console.log(fileName);        
         try{
             fs.readFile(fileName, 'utf-8', (err, data) => {
                 // if(err){

@@ -38,13 +38,14 @@ export class ToDoList extends React.Component <ToDoListProps,ToDoListState>{
     render() {
       return (
       <div className="to-do-list-main">
-        <h1>ToDo</h1>
-          <input
+        <div className="input">
+          <input 
             onChange={ (input) => this.changeUserInput(input.target.value) }
             value={this.state.userInput}
             type="text"
             />
-          <button onClick={ this.onAddListItem}>Add to List</button>
+          <button onClick={ this.onAddListItem}>Enter</button>
+          </div>
           <ul className="list" style={{flexDirection: 'row'}}>
             {this.props.list.map( (listItem) => 
               <ListItem dataKey={listItem.key} 
