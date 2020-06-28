@@ -4,17 +4,14 @@ import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-router-dom";
 import ToDoList, { ListItemData } from "./ToDo";
+import getFileName from "./Files";
 
 type DisplayJournalState = {items: ListItemData[]}
 let name = 'displayJournal';
-let date = new Date();
 let extension = '.json';
-let newName = name.concat(date.toDateString(),extension); 
-
 
 export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
     private nextID: number = 0;
-    private fileName = newName
 
     constructor(props) {
         super(props)
@@ -44,7 +41,7 @@ export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
     }
 
         private loadList = () => {
-            var data = ipcRenderer.sendSync('read', this.fileName)
+            var data = ipcRenderer.sendSync('read', getFileName(name, extension))
             console.log("private display: " + data)
             this.setState({items: JSON.parse(data)})
         };
@@ -52,7 +49,7 @@ export class DisplayJournal extends React.Component <{}, DisplayJournalState> {
         private saveList = () => {
             var sendString = JSON.stringify(this.state.items);
             console.log(sendString);      
-            ipcRenderer.send("save", [this.fileName ,sendString]);
+            ipcRenderer.send("save", [getFileName(name, extension) ,sendString]);
           }
 
           addToList = (val: string) => {

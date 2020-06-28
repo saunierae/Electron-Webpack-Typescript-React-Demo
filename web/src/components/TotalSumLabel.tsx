@@ -4,17 +4,15 @@ import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import ToDoList, { ListItemData } from "./ToDo";
 import { fileURLToPath } from "url";
+import getFileName from "./Files"
 
 type TotalSumState = {items: ListItemData[]}
 let name = 'totalSum';
-let date = new Date();
 let extension = '.json';
-let newName = name.concat(date.toDateString(),extension); 
 
 
 export class TotalSum extends React.Component <{}, TotalSumState> {
     private nextID: number = 0;
-    private fileName = newName;
 
     constructor(props) {
         super(props)
@@ -44,7 +42,7 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
     }
 
         private loadList = () => {
-            var data = ipcRenderer.sendSync('read', this.fileName)
+            var data = ipcRenderer.sendSync('read', getFileName(name, extension))
             console.log("private display: " + data)
             this.setState({items: JSON.parse(data)})
         };
@@ -52,7 +50,7 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
         private saveList = () => {
             var sendString = JSON.stringify(this.state.items);
             console.log(sendString);      
-            ipcRenderer.send("save", [this.fileName ,sendString]);
+            ipcRenderer.send("save", [getFileName(name, extension),sendString]);
           }
 
           addToList = (val: string) => {

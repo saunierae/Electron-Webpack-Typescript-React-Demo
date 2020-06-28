@@ -1,9 +1,12 @@
-// const path = require('path')
+import * as React from "react";
 
-// exports.save = (filePath, contents) => {
-//     contents.replace(/^data:files\json:base)
-// }
+export default function getFileName(name, extension) {
+    var curDate = new Date();
+    var y = curDate.getFullYear();
+    var d = curDate.getDate();
+    var m = curDate.getMonth() + 1;
+    var mm = m < 10 ? '0' + m : m;
+    var dd = d < 10 ? '0' + d : d;
 
-// exports.getFilesDir = app => {
-//     return path.join(app.getPath('files'))
-// }
+    return '' + mm + '-' + dd + '-' + y + '-' + name + extension;
+  }

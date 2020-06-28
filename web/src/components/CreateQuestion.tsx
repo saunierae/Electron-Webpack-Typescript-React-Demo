@@ -3,17 +3,15 @@ import { useCallback } from "react";
 import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import ToDoList, { ListItemData } from "./ToDo";
+import getFileName from "./Files"
 
 type CreateQuestionState = {items: ListItemData[]}
 let name = 'createQuestion';
-let date = new Date();
 let extension = '.json';
-let newName = name.concat(date.toDateString(),extension); 
 
 
 export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
     private nextID: number = 0;
-    private fileName = newName;
 
     constructor(props) {
         super(props)
@@ -30,7 +28,7 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
     render() {
         return (
             <div>
-                <h1>Label checkbox / radio buttons for section</h1>
+                <h1>Create Question</h1>
                     {/* <button onClick={ this.openWin}>Open new window</button> */}
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
 
@@ -43,7 +41,7 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
     }
 
         private loadList = () => {
-            var data = ipcRenderer.sendSync('read', this.fileName)
+            var data = ipcRenderer.sendSync('read', getFileName(name, extension))
             console.log("private display: " + data)
             this.setState({items: JSON.parse(data)})
         };
@@ -51,7 +49,7 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
         private saveList = () => {
             var sendString = JSON.stringify(this.state.items);
             console.log(sendString);      
-            ipcRenderer.send("save", [this.fileName ,sendString]);
+            ipcRenderer.send("save", [getFileName(name, extension) ,sendString]);
           }
 
           addToList = (val: string) => {
