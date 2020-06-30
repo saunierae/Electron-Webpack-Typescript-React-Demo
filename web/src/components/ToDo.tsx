@@ -2,7 +2,6 @@ import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
 import {ipcRenderer} from "electron";
-import PropTypes from 'prop-types'
 import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-router-dom";
 
 export type ListItemData = {key: number, val: string}

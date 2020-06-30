@@ -1,6 +1,13 @@
 import * as React from "react";
+import { useHistory } from "react-router-dom";
+import './tutorialImage.PNG';
 
 function Tutorial() {
+
+     const Item = () => {
+        let history = useHistory();
+      };
+
     return (
         <div>
             <h1>Tutorial</h1>
@@ -20,6 +27,8 @@ function Tutorial() {
                 <li>Click on the section to be removed</li>
                 <li>Click yes to remove the section</li>
             </ol>
+            <img src='tutorialImage.PNG' className="Example" alt="Example"/>
+            <button className="bottomRow" onClick={() => history.back()}>Back</button>
         </div>
     )
 }

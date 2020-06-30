@@ -2,7 +2,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
-import {BrowserRouter, Route, Switch, Link, Redirect, withRouter} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ToDoList, { ListItemData } from "./ToDo";
 import getFileName from "./Files";
 
@@ -25,6 +25,11 @@ export class LabelCheck extends React.Component <{}, LabelCheckState> {
     buildList (args) {
         console.log(args);
     }
+
+    Item = () => {
+        let history = useHistory();
+      };
+
     render() {
         return (
             <div>
@@ -37,6 +42,7 @@ export class LabelCheck extends React.Component <{}, LabelCheckState> {
                     <button className="saveList" onClick={this.saveList}>Complete</button>
                     <button className="loadList" onClick={this.loadList}>Load Preview</button>
                 </div>
+                <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

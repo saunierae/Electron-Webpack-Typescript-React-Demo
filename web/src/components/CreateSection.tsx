@@ -1,19 +1,34 @@
 import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
+import { useHistory } from "react-router-dom";
+
 
 interface CreateSectionProps {}
-interface CreateSectionState {selectedOption: string, userInput : number}
+interface CreateSectionState {selectedOption: string, userInput : number, value: string}
 
 
 export class CreateSection extends React.Component <CreateSectionProps, CreateSectionState>{
-    constructor(props) {
-        super(props);
-          this.state = {
-          userInput: 0,
-          selectedOption: "option1"
-        };
-      }
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       userInput: 0,
+       value: 'question',
+       selectedOption: "option1"
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('Selection ');
+    event.preventDefault();
+  }
     
       changeUserInput(input: number) {
         this.setState({
@@ -22,7 +37,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
       }
     
       addToList(input: number) {
-        if(input !== 0) {
+        if(input !== 0 && input > 0) {
   
           this.setState( { 
             userInput: input
@@ -42,13 +57,23 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
         console.log("You have submitted:", this.state.selectedOption);
       };
 
+       Item = () => {
+        let history = useHistory();
+      };
     render() {
       return (
         <div>
           <h1>Create Section for Journal</h1>  
-          <p></p>
-          <div>
-          <form onSubmit={this.handleFormSubmit}>
+          <p>Select Labels or Questions for your section:</p>
+            <form onSubmit={this.handleSubmit}>
+              <label> 
+              <select value={this.state.value} onChange={this.handleChange}>
+                <option value="question">Question</option>
+                <option value="label">Label</option>
+              </select>
+              </label>
+            </form>
+          {/* <form onSubmit={this.handleFormSubmit}>
               <div className="form-check1">
                 <label>
                   <input
@@ -81,8 +106,9 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 </button>
               </div>
             </form>
-            </div>
-          <p>Enter in the number of questions or labels you would like to add for this series</p>
+            </div> */}
+
+          <p>Enter in the number of questions or labels you would like to add for this series:</p>
           <input
             type="number"
             pattern="[0-9]*"
@@ -173,15 +199,20 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                 </label>
               </div>
               <div className="form-group-2">
-                <button className="btn btn-primary mt-2" type="submit">
-                  Save
+                <p></p>
+                <button className="saveList right-align" type="submit">
+                  Complete Section
                 </button>
               </div>
             </form>
             </div>
+        <button className="bottomRow" onClick={() => history.back()}>Back</button>
         </div>
     )
 }
 }
+
+
+
 
 

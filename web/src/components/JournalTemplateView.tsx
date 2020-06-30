@@ -2,15 +2,15 @@ import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
+import { Redirect, useHistory } from "react-router-dom";
 import ToDoList, { ListItemData } from "./ToDo";
-import getFileName from "./Files"
-import { useHistory } from "react-router-dom";
+import getFileName from "./Files";
 
-type CreateQuestionState = {items: ListItemData[]}
-let name = 'createQuestion';
+type JournalTemplateViewState = {items: ListItemData[]}
+let name = 'createtodo';
 let extension = '.json';
 
-export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
+export class JournalTemplateView extends React.Component <{}, JournalTemplateViewState> {
     private nextID: number = 0;
 
     constructor(props) {
@@ -21,24 +21,38 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
         }
     }
     
+
     buildList (args) {
         console.log(args);
     }
 
     Item = () => {
-        let history = useHistory();
+        const history = useHistory();
       };
 
+      handleClick() {
+        return <Redirect to='/CreateSection'/>;
+      }  
+      
     render() {
         return (
             <div>
-                <h1>Create Question</h1>
+                <h1>Select Your Journal Template</h1>
                     {/* <button onClick={ this.openWin}>Open new window</button> */}
+                    <p>Enter Journal Name</p>
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
 
                     <div>
-                    <button className="saveList" onClick={this.saveList}>Complete</button>
-                    <button className="loadList" onClick={this.loadList}>Load Preview</button>
+                    <div className="center">
+                        <button>View Tutorial</button>
+                        <button className="loadList" onClick={this.loadList}>View Current Template</button>
+                    </div>
+                    <div className="centerRow2">
+                    <button onClick={this.handleClick}>Add a Section</button>
+                    {/* return <Redirect to='CreateSection'/> */}
+                    <button>Delete Section</button>
+                    </div>
+                    <button className="saveList right-align" onClick={this.saveList}>Complete Journal Template</button>
                 </div>
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
@@ -69,3 +83,4 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
                 })
           }
     }
+

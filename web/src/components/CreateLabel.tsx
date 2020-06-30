@@ -4,6 +4,7 @@ import './Styles.css';
 import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import ToDoList, { ListItemData } from "./ToDo";
 import getFileName from "./Files";
+import { useHistory } from "react-router-dom";
 
 type CreateLabelState = {items: ListItemData[]}
 let name = 'createLabel';
@@ -23,6 +24,11 @@ export class CreateLabel extends React.Component <{}, CreateLabelState> {
     buildList (args) {
         console.log(args);
     }
+
+    Item = () => {
+        let history = useHistory();
+      };
+
     render() {
         return (
             <div>
@@ -34,6 +40,7 @@ export class CreateLabel extends React.Component <{}, CreateLabelState> {
                     <button className="saveList" onClick={this.saveList}>Complete</button>
                     <button className="loadList" onClick={this.loadList}>Load Preview</button>
                 </div>
+                <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

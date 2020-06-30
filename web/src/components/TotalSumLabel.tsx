@@ -5,6 +5,8 @@ import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import ToDoList, { ListItemData } from "./ToDo";
 import { fileURLToPath } from "url";
 import getFileName from "./Files"
+import { useHistory } from "react-router-dom";
+
 
 type TotalSumState = {items: ListItemData[]}
 let name = 'totalSum';
@@ -26,6 +28,11 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
     buildList (args) {
         console.log(args);
     }
+
+    Item = () => {
+        let history = useHistory();
+      };
+
     render() {
         return (
             <div>
@@ -37,6 +44,7 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
                     <button className="saveList" onClick={this.saveList}>Complete</button>
                     <button className="loadList" onClick={this.loadList}>Load Preview</button>
                 </div>
+                <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

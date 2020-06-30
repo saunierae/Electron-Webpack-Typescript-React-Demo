@@ -28,3 +28,49 @@
     border-bottom: 1px solid #333333;
     border-left: 1px solid #CCCCCC;
   }
+
+  .Example {
+      background-image: url(./tutorialImage.PNG);
+  }
+
+  .center {
+    display: inline-block;
+    padding: 15px 32px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .centerRow2 {
+    margin: 0;
+    padding: 15px 32px;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .bottomRow {
+    margin: 0;
+    bottom: 5%;
+    position: absolute;
+    left: 25px;
+  }
+
+  .right-align {
+      margin: 0;
+      bottom: 5%;
+      position: absolute;
+      right: 25px;
+  }
+
+  .journalTemplatebtn {
+    margin: 0;
+    top: 20%;
+    position: absolute;
+    right: 250px;
+  }
