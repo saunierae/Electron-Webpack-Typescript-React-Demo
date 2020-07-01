@@ -5,8 +5,9 @@ import {ipcRenderer, BrowserView, BrowserWindow} from "electron";
 import { Redirect, useHistory } from "react-router-dom";
 import ToDoList, { ListItemData } from "./ToDo";
 import getFileName from "./Files";
+import Link from "react-router-dom";
 
-type JournalTemplateViewState = {items: ListItemData[]}
+type JournalTemplateViewState = {items: ListItemData[], nav: boolean, navDest: string}
 let name = 'createtodo';
 let extension = '.json';
 
@@ -17,11 +18,12 @@ export class JournalTemplateView extends React.Component <{}, JournalTemplateVie
         super(props)
     
         this.state = {
-             items: []     
+             items: [],
+             nav: false,
+             navDest: null,
         }
     }
     
-
     buildList (args) {
         console.log(args);
     }
@@ -30,33 +32,32 @@ export class JournalTemplateView extends React.Component <{}, JournalTemplateVie
         const history = useHistory();
       };
 
-      handleClick() {
-        return <Redirect to='/CreateSection'/>;
-      }  
-      
-    render() {
-        return (
-            <div>
-                <h1>Select Your Journal Template</h1>
-                    {/* <button onClick={ this.openWin}>Open new window</button> */}
-                    <p>Enter Journal Name</p>
-                    <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
+    handleClick = (destination) => {
+        console.log("got into handleClick");
+        this.setState({nav: true, navDest: destination});
+        // history.pushState('/JournalTemplateView');
+    }
 
-                    <div>
-                    <div className="center">
-                        <button>View Tutorial</button>
-                        <button className="loadList" onClick={this.loadList}>View Current Template</button>
-                    </div>
-                    <div className="centerRow2">
-                    <button onClick={this.handleClick}>Add a Section</button>
-                    {/* return <Redirect to='CreateSection'/> */}
-                    <button>Delete Section</button>
-                    </div>
-                    <button className="saveList right-align" onClick={this.saveList}>Complete Journal Template</button>
+    render() {
+        if (this.state.nav) {  
+            this.setState({nav: false});          
+            return <Redirect to={this.state.navDest}/>
+        }
+        else {
+            return (
+                <div>
+                    <h1>Select Your Journal Template</h1>
+                        <p>Enter Journal Name</p>
+                        <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
+                            <button className="center" onClick={e => this.handleClick('/Tutorial')}>View Tutorial</button>
+                            <button className="loadList centerRow4" onClick={this.loadList}>View Current Template</button>
+                            <button className="centerRow2" onClick={e => this.handleClick('/CreateSection')}>Add a Section</button>
+                            <button className="centerRow3" onClick={e => this.handleClick('/DeleteSection')}>Delete Section</button>
+                            <button className="centerRow5" onClick={this.saveList}>Complete Journal Template</button>
+                            <button className="bottomRow" onClick={() => history.back()}>Back</button>
                 </div>
-                <button className="bottomRow" onClick={() => history.back()}>Back</button>
-            </div>
-        )
+            )
+        }
     }
 
         private loadList = () => {

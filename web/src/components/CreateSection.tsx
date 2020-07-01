@@ -93,7 +93,7 @@ export class CreateSection extends React.Component <CreateSectionProps, CreateSe
                     type="radio"
                     name="group-1"
                     value="label"
-                    checked={this.state.selectedOption === "label"}
+                    checked={this.state.selectedOption === "la bel"}
                     onChange={this.handleOptionChange}
                     className="form-check-input-1"
                   />

@@ -33,14 +33,12 @@ export class CreateLabel extends React.Component <{}, CreateLabelState> {
         return (
             <div>
                 <h1>Create Label</h1>
+                Type in the label name beginning with the first label. 
                     {/* <button onClick={ this.openWin}>Open new window</button> */}
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
-
-                    <div>
-                    <button className="saveList" onClick={this.saveList}>Complete</button>
-                    <button className="loadList" onClick={this.loadList}>Load Preview</button>
-                </div>
-                <button className="bottomRow" onClick={() => history.back()}>Back</button>
+                    <button className="saveList centerRow2" onClick={this.saveList}>Complete</button>
+                    <button className="centerRow3 loadList" onClick={this.loadList}>Load Preview</button>
+                    <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

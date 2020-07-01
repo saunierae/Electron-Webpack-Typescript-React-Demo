@@ -21,7 +21,6 @@ export class LabelCheck extends React.Component <{}, LabelCheckState> {
         }
     }
     
-
     buildList (args) {
         console.log(args);
     }
@@ -34,15 +33,11 @@ export class LabelCheck extends React.Component <{}, LabelCheckState> {
         return (
             <div>
                 <h1>Label checkbox / radio buttons for section</h1>
-                    {/* <button onClick={ this.openWin}>Open new window</button> */}
-                    <div>
+                Type in the label name beginning with the first label.
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem} ></ToDoList>
-                    <div>
-                    </div>
-                    <button className="saveList" onClick={this.saveList}>Complete</button>
-                    <button className="loadList" onClick={this.loadList}>Load Preview</button>
-                </div>
-                <button className="bottomRow" onClick={() => history.back()}>Back</button>
+                    <button className="saveList centerRow2" onClick={this.saveList}>Complete</button>
+                    <button className="loadList centerRow3" onClick={this.loadList}>Load Preview</button>
+                    <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

@@ -24,7 +24,6 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
         }
     }
     
-
     buildList (args) {
         console.log(args);
     }
@@ -37,14 +36,11 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
         return (
             <div>
                 <h1>Label Total Sum for Section</h1>
-                    {/* <button onClick={ this.openWin}>Open new window</button> */}
+                Type in the label name beginning with the first label.
                     <ToDoList list = {this.state.items} addToList = {this.addToList} deleteItem = {this.deleteItem}></ToDoList>
-
-                    <div>
-                    <button className="saveList" onClick={this.saveList}>Complete</button>
-                    <button className="loadList" onClick={this.loadList}>Load Preview</button>
-                </div>
-                <button className="bottomRow" onClick={() => history.back()}>Back</button>
+                    <button className="saveList centerRow2" onClick={this.saveList}>Complete</button>
+                    <button className="loadList centerRow3" onClick={this.loadList}>Load Preview</button>
+                    <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )
     }
