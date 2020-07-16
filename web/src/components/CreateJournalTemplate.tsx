@@ -1,38 +1,29 @@
 import * as React from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import {Journal} from "./AppState";
+import { EditJournal } from "./EditJournal";
 
-type CreateJournalState = {nav: boolean, navDest: string}
+type CreateJournalTemplateProps = {
+    journals: Journal[],
+    addJournal: () => void,
+    deleteJournal: (id: number) => void,
+    editJournal: (id: number) => void
+}
 
-export class CreateJournalTemplate extends React.Component <{}, CreateJournalState>{
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             nav: false,
-             navDest: null,
-        }
-    }
-
-    Item = () => {
-        let history = useHistory();
-      };
-
-      handleClick = (destination) => {
-        console.log("got into handleClick");
-        this.setState({nav: true, navDest: destination});
-        // history.pushState('/JournalTemplateView');
-    }
+export class CreateJournalTemplate extends React.Component <CreateJournalTemplateProps>{
 
     render() {
-        if (this.state.nav) {  
-            this.setState({nav: false});          
-            return <Redirect to={this.state.navDest}/>
-        }
+       const journals = this.props.journals.map((journal, index) => 
+       {return <React.Fragment key={index}> 
+        <div>{journal.name}</div><button
+        onClick={() => this.props.deleteJournal(index)}>Delete</button>
+        <button onClick={() => this.props.editJournal(index)}>Edit</button></React.Fragment> })
         return (
             <div>
                 <h1>Current Journals</h1>
-                <button className="center" onClick={e => this.handleClick('/JournalTemplateView')}>Create Journal Template</button>
-                <button className="centerRow2" onClick={e => this.handleClick('/DeleteJournal')}>Delete Journal</button>
+                {journals}
+                <button className="center" onClick={e => this.props.addJournal()}>Create Journal Template</button>
+                {/* <button className="centerRow2" onClick={e => this.props.deleteJournal()}>Delete Journal</button> */}
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )

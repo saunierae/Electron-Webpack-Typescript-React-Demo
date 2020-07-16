@@ -21,7 +21,7 @@ export class CreateLabel extends React.Component <{}, CreateLabelState> {
         }
     }
 
-    buildList (args) {
+    buildList = (args) => {
         console.log(args);
     }
 

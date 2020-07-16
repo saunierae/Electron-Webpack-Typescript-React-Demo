@@ -18,13 +18,13 @@ export class ToDoList extends React.Component <ToDoListProps,ToDoListState>{
       }
     }
   
-    changeUserInput(input: string) {
+    changeUserInput = (input: string) => {
       this.setState({
         userInput: input
       });
     }
   
-    addToList(input: string) {
+    addToList = (input: string) => {
       if(input !== "") {
         this.props.addToList(input)
       }

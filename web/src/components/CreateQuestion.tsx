@@ -21,7 +21,7 @@ export class CreateQuestion extends React.Component <{}, CreateQuestionState> {
         }
     }
     
-    buildList (args) {
+    buildList = (args) => {
         console.log(args);
     }
 

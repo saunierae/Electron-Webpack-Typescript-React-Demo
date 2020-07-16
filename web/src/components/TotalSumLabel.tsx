@@ -24,7 +24,7 @@ export class TotalSum extends React.Component <{}, TotalSumState> {
         }
     }
     
-    buildList (args) {
+    buildList = (args) => {
         console.log(args);
     }
 
