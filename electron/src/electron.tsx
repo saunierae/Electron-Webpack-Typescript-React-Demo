@@ -2,9 +2,13 @@ import fs from "fs";
 import {app, BrowserWindow, Dialog, IpcMain, ipcMain} from "electron";
 import * as path from "path";
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+// Keep a global reference of the window object, otherwise it will be garbage collected.
 let mainWindow: BrowserWindow | null = null;
+
+var outputVars = {};
+var numSections = {
+    sectionNum: 0,    
+};
 
 console.log("Hello");
 function createWindow () {
@@ -35,15 +39,12 @@ function createWindow () {
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
         mainWindow = null
     });
 
+    // Shows the window
     mainWindow.show();
-    // Emitted when the window is ready to be shown
-    // This helps in showing the window gracefully.
+    // This helps in showing the window gracefully, but was causing issues with mine
     // mainWindow.once('ready-to-show', () => {
     //     if(mainWindow != null) {
     //         mainWindow.show()
@@ -54,12 +55,12 @@ function createWindow () {
         try {
             //fs.writeFileSync('myfile.txt', 'the text to write in the file', 'utf-8'); 
             fs.writeFileSync(args[0], args[1], 'utf-8');
+            event.returnValue = null;
+            console.log("args: " + args);
+            console.log("Data saved to file: " + args[1]);
     }
     catch(e) { alert('Failed to save the file !'); 
     }})
-
-    //let filepath = "C:\Users\Saunie\Documents\GitHub\School\SDEV435\Final\electron\myfile.txt";
-    //let fileName = 'toDo.json'
 
     ipcMain.on("read", (event, args) => {
         // dialog.showOpenDialog((fileNames) => {
@@ -78,7 +79,12 @@ function createWindow () {
                 //     return;
                 // }
                 //returnData = data;
-                event.returnValue=data;
+                if (data) {
+                    event.returnValue=JSON.parse(data);
+                }
+                else {
+                    event.returnValue={journals: []};
+                }
                 // Change how to handle the file content
                 console.log("The file content is : " + data);
             });
@@ -91,20 +97,15 @@ function createWindow () {
         }
         })}
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+// Electrong completes initializing and is ready to create browser windows.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') app.quit()
 });
 
+// Recreating the window if clicked
 app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) createWindow()
 });

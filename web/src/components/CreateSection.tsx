@@ -2,15 +2,14 @@ import * as React from "react";
 import { useCallback } from "react";
 import './Styles.css';
 import { useHistory } from "react-router-dom";
-import { ipcRenderer } from "electron";
 import {Section, SectionItem} from './AppState';
 
 type CreateSectionProps = {
   journalId: number,
   value: string, 
   sectionId: number,
-  addSection: (id: number, sectionInfo: Section) => void,
-  deleteSection: (journalId: number, sectionId) => void,
+  addSection: (journalId: number, sectionId: number, sectionInfo: Section) => void,
+  deleteSection: (journalId: number, sectionId: number) => void,
   editSectionName: (journalId: number, sectionId: number, value: string) => void
 }
 // interface CreateSectionState {selectedOption: string, userInput : number, value: string}
@@ -74,45 +73,10 @@ export class CreateSection extends React.Component <CreateSectionProps>{ //, Cre
             </select>
             </label>
           </form>
-        {/* <form onSubmit={this.handleFormSubmit}>
-            <div className="form-check1">
-              <label>
-                <input
-                  type="radio"
-                  name="group-1"
-                  value="question"
-                  checked={this.state.selectedOption === "question"}
-                  onChange={this.handleOptionChange}
-                  className="form-check-input-1"
-                />
-                Question
-              </label>
-            </div>
-            <div className="form-check1">
-              <label>
-                <input
-                  type="radio"
-                  name="group-1"
-                  value="label"
-                  checked={this.state.selectedOption === "la bel"}
-                  onChange={this.handleOptionChange}
-                  className="form-check-input-1"
-                />
-                Label
-              </label>
-            </div>
-            <div className="form-group1">
-              <button className="btn1 btn-primary mt-2" type="submit">
-                Save
-              </button>
-            </div>
-          </form>
-          </div> */}
-
         <h2>Section Name:</h2>
         <input
           type="text"
-          onChange={ (input) => this.props.setSectionName(this.props.sectionId, input.target.value)}
+          // onChange={ (input) => this.props.editSectionName(journalId, sectionId, input.target.value)}
           // value={this.state.userInput}
           />
         <p>Select the type of input that you would like to add:</p>

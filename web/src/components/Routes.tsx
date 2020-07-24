@@ -2,116 +2,144 @@ import * as React from "react";
 import { HashRouter, Route, NavLink as HashLink, Link, Switch } from "react-router-dom";
 import { ToDoList } from "./ToDo";
 import { CreateSection } from "./CreateSection";
-import { CreateLabel } from "./CreateLabel";
-import { EditJournal } from "./EditJournal";
-import { App } from "./App";
+import { EditJournalForm } from "./EditJournalForm";
 import CreateJournalTemplate from "./CreateJournalTemplate";
-import { CreateQuestion } from "./CreateQuestion";
 import Tutorial from "./Tutorial";
-import { LabelCheck } from "./LabelCheck";
 import { TotalSum } from "./TotalSumLabel";
-import { DeleteSection } from "./DeleteSection";
-import { DeleteJournal } from "./DeleteJournal";
-import {ipcRenderer } from "electron";
-import { AppState, 
-  Section, 
-  SectionItem, 
-  Journal, 
-  editJournalName, 
-  addJournal, 
-  deleteJournal, 
-  editSectionName, 
-  addSection, 
-  deleteSection } from "./AppState";
+import { ipcRenderer } from "electron";
+import {
+  AppState,
+  Section,
+  SectionItem,
+  Journal,
+  editJournalName,
+  addJournal,
+  deleteJournal,
+  editItemName,
+  editSectionName,
+  addSection,
+  deleteSection,
+  deleteItem,
+  addItem
+} from "./AppState";
 import { windowsStore } from "process";
 
-export class Routes extends React.Component <{}, AppState> {
+export class Routes extends React.Component<{}, AppState> {
 
   constructor(props) {
     super(props)
-  
-    this.state = 
+
+    this.state =
       ipcRenderer.sendSync('read', "data.json")
   }
 
-  editJournal = (id: number) => {
-    window.location.hash="/EditJournal";
-    window.location.search = "id=" + id;
+  editJournal = (journalId: number) => {
+    var test = this.state
+    window.location.hash = "/EditJournal";
+    window.location.search = "id=" + journalId;
+    this.forceUpdate();
+  }
+
+  addJournal = () => {
+    this.updateAppState(addJournal(this.state, { name: "Name Journal", sections: [] }))
   }
 
   editJournalName = (journalId: number, name: string) => {
     this.updateAppState(editJournalName(this.state, journalId, name))
   }
 
-  addJournal = () => {
-    this.updateAppState(addJournal(this.state, {name: "unnamed", sections: []}))
-  }
-
   deleteJournal = (journalId: number) => {
     this.updateAppState(deleteJournal(this.state, journalId))
   }
 
-  editSectionName = (journalId: number, sectionId: number, value: string) => {
-    this.updateAppState(editSectionName(this.state, journalId, sectionId, value))
+  editItemName = (journalId: number, sectionId: number, itemId: number, value: string) => {
+    this.updateAppState(editItemName(this.state, journalId, sectionId, itemId, value))
+  }
+
+  editSectionName = (journalId: number, sectionId: number, name: string) => {
+    this.updateAppState(editSectionName(this.state, journalId, sectionId, name))
   }
 
   addSection = (journalId: number) => {
-    this.updateAppState(addSection(this.state, journalId, {items: []}))
+    this.updateAppState(addSection(this.state, journalId, {name: "Name Section", itemType: "freeform", items: [] }))
+  }
+
+  addItem = (journalId: number, sectionId: number) => {
+    this.updateAppState(addItem(this.state, journalId, sectionId, { label: "unnamed" }))
   }
 
   deleteSection = (journalId: number, sectionId: number) => {
     this.updateAppState(deleteSection(this.state, journalId, sectionId))
   }
 
+  deleteItem = (journalId: number, sectionId: number, itemId: number) => {
+    this.updateAppState(deleteItem(this.state, journalId, sectionId, itemId))
+  }
+
   updateAppState = (state: AppState) => {
-    ipcRenderer.sendSync('save', 'data.json', JSON.stringify({...this.state, ...state}))
+    ipcRenderer.sendSync('save', ['data.json', JSON.stringify({ ...this.state, ...state })])
     this.setState(state);
   }
 
   render() {
     const searchParams = new URLSearchParams(window.location.search);
+    const journalId = parseInt(searchParams.get("id"));
+    const sectionId = parseInt(searchParams.get("id"));
+    const itemId = parseInt(searchParams.get("id"));
+    const editJournalForm = !isNaN(journalId) && !isNaN(sectionId) && !isNaN(itemId) ? <EditJournalForm
+    journal={this.state.journals[journalId]}
+    journalId={journalId}
+    sectionId={sectionId}
+    itemId={itemId}
+    addSection={this.addSection}
+    additem={this.addItem}
+    deleteSection={this.deleteSection}
+    editSectionName={this.editSectionName}
+    editItemName={this.editItemName}
+    deleteItem={this.deleteItem}
+  /> : null; 
+
+    const createJournalTemplate = !isNaN(journalId) ? <CreateJournalTemplate
+    journals={this.state.journals}
+    journal={this.state.journals[journalId]}
+    journalId={journalId}
+    addJournal={this.addJournal}
+    deleteJournal={this.deleteJournal}
+    editJournal={this.editJournal}
+    editJournalName={this.editJournalName}
+  /> : null; 
     return (
       <div>
-      <HashRouter>
+        <HashRouter>
           <Link to="/JournalTemplateView" className="button">Journal Template View</Link>
           <Link to="/CreateJournalTemplate" className="button">Create Journal Template</Link>
-          <Link to="/CreateLabel" className="button">Create Label</Link>
-          <Link to="/CreateSection" className="button">Create Section</Link>
-          <Link to="/CreateQuestion" className="button">Create Question</Link>
           <Link to="/Tutorial" className="button">Tutorial</Link>
-          <Link to="/LabelCheck" className="button">Label checkbox</Link>
           <Link to="/TotalSum" className="button">Total Sum Label</Link>
-          <Link to="/DeleteSection" className="button">Delete Section</Link>
-          <Link to="/DeleteJournal" className="button">Delete Journal</Link>
-          <Link to="/EditJournal" className="button">Edit Journal</Link>
-              <Switch>
-                {/* <Route path="/JournalTemplateView"><JOJournal/></Route> */}
-                <Route path="/EditJournal"><EditJournal
-                journalID={parseInt(searchParams.get("id"))}                
-                onUpdateName={this.editJournalName}
+          <Link to="/EditJournalForm" className="button">Edit Journal</Link>
+          <Switch>
+            {/* <Route path="/JournalTemplateView"><JOJournal/></Route> */}
+            <Route path="/EditJournalForm">{editJournalForm}</Route>
+            <Route path="/CreateJournalTemplate">
+              {/* {createJournalTemplate} */}
+              <CreateJournalTemplate
                 journals={this.state.journals}
-                 /></Route>
-                <Route path="/CreateJournalTemplate"><CreateJournalTemplate 
-                journals={this.state.journals} 
-                addJournal={this.addJournal} 
+                journal={this.state.journals[journalId]}
+                journalId={journalId}
+                addJournal={this.addJournal}
                 deleteJournal={this.deleteJournal}
                 editJournal={this.editJournal}
-                /></Route>
-                <Route path="/CreateLabel"><CreateLabel/></Route>
-                <Route path="/CreateSection"><CreateSection
+                editJournalName={this.editJournalName}
+            />
+            </Route>
+            {/* <Route path="/CreateSection"><CreateSection
                 journalId={parseInt(searchParams.get("id"))}    
                 addSection={this.addSection}
                 deleteSection={this.deleteSection}           
-                editSectionName={this.editSectionName}/>
-                </Route>
-                <Route path="/CreateQuestion"><CreateQuestion/></Route>
-                <Route path="/Tutorial"><Tutorial/></Route>
-                <Route path="/LabelCheck"><LabelCheck/></Route>
-                <Route path="/TotalSum"><TotalSum/></Route>
-                <Route path="/DeleteSection"><DeleteSection/></Route>
-                <Route path="/DeleteJournal"><DeleteJournal/></Route>
-              </Switch>
-      </HashRouter>
+                /></Route> */}
+            <Route path="/Tutorial"><Tutorial /></Route>
+            <Route path="/TotalSum"><TotalSum /></Route>
+          </Switch>
+        </HashRouter>
       </div>
     )
   }

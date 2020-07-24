@@ -1,12 +1,22 @@
 import * as React from "react";
+import {useImage} from "react-image";
 import { useHistory } from "react-router-dom";
-import './tutorialImage.PNG';
+// import tutorialimg from "../tutorialimg.png";
 
 function Tutorial() {
 
      const Item = () => {
         let history = useHistory();
       };
+
+    //   function MyImageComponent() {
+    //       const {src} = useImage({
+    //           srcList: 
+    //       })
+    //   }
+    //   function Header() {
+    //       return <img src={require{tutorialimg.default}} className="tutorialimg" alt="tutorialimg"/>
+    //   }
 
     return (
         <div>
@@ -27,7 +37,7 @@ function Tutorial() {
                 <li>Click on the section to be removed</li>
                 <li>Click yes to remove the section</li>
             </ol>
-            <img src='tutorialImage.PNG' className="Example" alt="Example"/>
+            {/* <img src={require{tutorialimg.default}} className="Example" alt="Example"/> */}
             <button className="bottomRow" onClick={() => history.back()}>Back</button>
         </div>
     )
