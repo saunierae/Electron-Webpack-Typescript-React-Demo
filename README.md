@@ -1,12 +1,11 @@
 # React Webpack Typescript Electron Journal Applciation
 
+Users use a form to create custom journal forms for desired journals.
+
 * **[Electron](https://www.electronjs.org/)** (9.x)
 * **[React](https://facebook.github.io/react/)** (16.x)
 * **[Webpack](https://webpack.js.org/)** (4.x)
 * **[Typescript](https://www.typescriptlang.org/)** (3.x)
-* **[Hot Module Replacement (HMR)](https://webpack.js.org/concepts/hot-module-replacement/)** using [React Hot Loader](https://github.com/gaearon/react-hot-loader) (4.x)
-* [Babel](http://babeljs.io/) (7.x)
-* [SASS](http://sass-lang.com/)
 * [Jest](https://facebook.github.io/jest/) - Testing framework for React applications
 * Production build script
 * Image loading/minification using [Image Webpack Loader](https://github.com/tcoopman/image-webpack-loader)
@@ -20,9 +19,10 @@
 ## Usage
 **Development**
 
-`yarn run start-dev`
+1. change directory to electron
+`./build.ps1`
 
-* Build app continuously (HMR enabled)
+
 * App served @ `http://localhost:8080`
 
 **Production**
@@ -38,6 +38,7 @@
 
 Command | Description
 --- | ---
+`build.ps1` | (Script to build app to `/electron/` and `/web/`
 `yarn build` | (Build app to `/electron/`
 `yarn launch-electron` | (Launch app to `/electron/`
 `yarn run start-dev` | Build app continuously (HMR enabled) and serve @ `http://localhost:8080`
@@ -48,7 +49,12 @@ Command | Description
 `yarn run lint --fix` | Run Typescript linter and fix issues
 `yarn run start` | (alias of `yarn run start-dev`)
 
+
+
 **Note**: replace `yarn` with `npm` in `package.json` if you use npm.
+**Debug Electron**: update the electron's `package.json` 
+from "launch-electron": "node_modules/electron/dist/electron.exe dist/main.js" 
+to : "launch-electron": "node_modules/electron/dist/electron.exe --inspect-brk dist/main.js"
 
 ## See also
 * [React Webpack Babel Starter](https://github.com/vikpe/react-webpack-babel-starter)
