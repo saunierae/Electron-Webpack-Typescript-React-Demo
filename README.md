@@ -20,7 +20,7 @@ Users use a form to create custom journal forms for desired journals.
 **Development**
 
 1. change directory to electron
-`./build.ps1`
+2. run `./build.ps1`to launch application
 
 
 * App served @ `http://localhost:8080`
