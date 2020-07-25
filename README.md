@@ -19,8 +19,8 @@ Users use a form to create custom journal forms for desired journals.
 ## Usage
 **Development**
 
-1. change directory to electron
-2. run `./build.ps1`to launch application
+1. Change directory to electron
+2. Run `./build.ps1`to launch application
 
 
 * App served @ `http://localhost:8080`
