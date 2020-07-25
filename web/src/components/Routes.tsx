@@ -60,8 +60,13 @@ export class Routes extends React.Component<{}, AppState> {
     this.updateAppState(editSectionName(this.state, journalId, sectionId, name))
   }
 
-  addSection = (journalId: number) => {
-    this.updateAppState(addSection(this.state, journalId, {name: "Name Section", itemType: "freeform", items: [] }))
+  addSection = (journalId: number, type: string) => {
+    if (type == "freeform") {
+      this.updateAppState(addSection(this.state, journalId, {name: "Name Section", itemType: "freeform", items: [] }))  
+    }
+    else if (type == "checkbox") {
+      this.updateAppState(addSection(this.state, journalId, {name: "Name Section", itemType: "checkbox", items: [] }))
+    }
   }
 
   addItem = (journalId: number, sectionId: number) => {

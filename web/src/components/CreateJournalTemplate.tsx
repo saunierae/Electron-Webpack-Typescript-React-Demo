@@ -18,7 +18,7 @@ type CreateJournalTemplateProps = {
 export class CreateJournalTemplate extends React.Component <CreateJournalTemplateProps>{
 
     editJournalName = (journalId: number, value: string ) => {
-        this.props.editJournalName(this.props.journalId, value);
+        this.props.editJournalName(journalId, value);
     }
     
     render() {

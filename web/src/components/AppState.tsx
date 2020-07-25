@@ -96,7 +96,7 @@ export const addItem = (appState: AppState, journalId: number, sectionId: number
 
 //Edit Item name
 export const editItemName = (appState: AppState, journalId: number, sectionId: number, itemId: number, value: string): AppState => {
-    const newItem = {...appState.journals[journalId].sections[sectionId].items[itemId], name: value};
+    const newItem = {...appState.journals[journalId].sections[sectionId].items[itemId], label: value};
     return updateItem(appState, journalId, sectionId, itemId, newItem)
   }
 

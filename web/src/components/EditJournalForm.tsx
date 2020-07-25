@@ -1,5 +1,8 @@
 import * as React from "react";
 import './Styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 import { Journal, Section, addJournal, SectionItem } from "./AppState";
 import { EditSection } from "./EditSection";
 import { EditItem } from "./EditItem";
@@ -9,12 +12,11 @@ type EditJournalFormProps = {
     journal: Journal,
     sectionId: number,
     itemId: number,
-    addSection: (journalId: number) => void,
+    addSection: (journalId: number, type: string) => void,
     additem: (journalId: number, sectionId: number) => void,
     deleteSection: (journalId: number, sectionId: number) => void,
     deleteItem: (journalId: number, sectionId: number, itemId: number) => void,
     editSectionName: (journalId: number, sectionId: number, value: string) => void,
-    // editJournalName: (journalId: number, value: string) => void,
     editItemName: (journalId: number, sectionId: number, itemId: number, value: string) => void
 }
 
@@ -29,50 +31,52 @@ export class EditJournalForm extends React.Component <EditJournalFormProps> {
         this.props.editItemName(this.props.journalId, sectionId, itemId, value);
     }
 
-    // editJournalName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     this.props.editJournalName(this.props.journalId, e.target.value);
-    // }
-
     render() {
 
-        const sections = this.props.journal.sections.map((s, index) => <EditSection key={index} sectionId={index} section={s} editSectionName={this.editSectionName}/>)
-        const itemsArr = []        
-        sections.forEach(function(section, index, arr)  {
-            itemsArr.push(section.props.items.map((i: SectionItem, index: number) => <EditItem key={index} sectionId={index} itemId={index} item={i} editItemName={this.editItemName}/>))
-        })
-        //sections.forEach(section => itemsArr.push(this.props.journal.sections[section.key].items))       
+        const handleSectionSelect = (e: string) => {
+            this.props.addSection(this.props.journalId, e);
+        }
 
-        //const items = this.props.journal.sections.items.map((s, i, index) => <EditItem key={index} sectionId={index} section={s} itemId={index} item={i} editItemName={this.editItemName}/>)
+        const sections = this.props.journal.sections.map((s, index) => <EditSection key={index} sectionId={index} section={s} editSectionName={this.editSectionName}/>)
+        const itemsArr = []
+        const sectionArr = []
+
+        for (var i = 0; i < sections.length; i++) {
+            // sectionArr.push(sections[i]);
+            itemsArr.push(sections[i].props.section.items.map((item: SectionItem, itemIndex: number) => <EditItem key={itemIndex} sectionId={i} itemId={itemIndex} item={item} editItemName={this.editItemName}/>))
+
+            // for (var j = 0; j < itemsArr[i]; i++) {
+            //     sectionArr.push(itemsArr[j]);
+            // }
+        }
+
+        const viewSections = this.props.journal.sections.map((section, index) => 
+        // const journals = this.props.journals.map((j, index) => <EditJournal key={index} journalId={index} journal={j} editJournalName={this.editJournalName}/>)
+         {return <React.Fragment> 
+         <EditSection key={index} sectionId={index} section={section} editSectionName={this.editSectionName}/>
+          {/* <div>{journal.name}</div> */}
+          <button
+          onClick={() => this.props.deleteSection(this.props.journalId, index)}>Delete</button>
+          <button onClick={() => this.props.additem(this.props.journalId, index)}>Add Item</button>
+          </React.Fragment> })
+
         return (
             <div>
-                {/* <div>
-                    <p>Enter Journal Name</p>
-                    <input onChange={ this.editJournalName}/>
-                </div> */}
                 <div>
-                    <div>
-                    Enter Section Name:
-                    <input/></div>
                     <div>
                     Select Drop Down
-                    <form>
-                        <label>
-                            <select id="type">
-                                <option value="checkbox">Checkbox</option>
-                                <option value="freeform">Freeform</option>
-                            </select>
-                        </label>
-                    </form>
                     </div>
                     <div>
-                        <button onClick={() => this.props.additem(this.props.journalId, this.props.sectionId)}>Add Item</button>
-                    </div>
+                        <DropdownButton title="Add Section" onSelect={handleSectionSelect}>
+                            <Dropdown.Item eventKey="freeform">Freeform</Dropdown.Item>
+                            <Dropdown.Item eventKey="checkbox">CheckBox</Dropdown.Item>
+                        </DropdownButton>
+                    {/* <button onClick={() => this.props.addSection(this.props.journalId, document.getElementById("type").nodeValue)}>Add Another Section</button> */}
                 </div>
-                {sections}
+                </div>
+                {viewSections}
+                {/* {sections} */}
                 {itemsArr}
-                <div>
-                    <button onClick={() => this.props.addSection(this.props.journalId)}>Add Another Section</button>
-                </div>
             </div>
         )
     }

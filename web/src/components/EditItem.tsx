@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { SectionItem } from './AppState'
 
-type EditItemProps = {item: SectionItem, sectionId: number, itemId: number, editItemName: (itemId: number, label: string) => void}
+type EditItemProps = {item: SectionItem, sectionId: number, itemId: number, editItemName: (sectionId: number, itemId: number, label: string) => void}
 
 
 export class EditItem extends React.Component <EditItemProps> {
 
     
     editItemName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.editItemName(this.props.itemId, e.target.value);
+        this.props.editItemName(this.props.sectionId, this.props.itemId, e.target.value);
     }
     
     render() {

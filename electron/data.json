@@ -1,1 +1,1 @@
-{"journals":[{"name":"Name Journal","sections":[{"name":"Name Section","itemType":"freeform","items":[]}]},{"name":"Name Journal","sections":[]}]}
+{"journals":[{"name":"Name Journal","sections":[{"name":"Section 1","itemType":"freeform","items":[{"label":"item1"},{"label":"item1"}]},{"name":"Section 2","itemType":"freeform","items":[{"label":"item2"},{"label":"item2"}]}]}]}
