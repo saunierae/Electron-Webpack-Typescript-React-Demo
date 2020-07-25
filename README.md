@@ -56,6 +56,3 @@ Command | Description
 from "launch-electron": "node_modules/electron/dist/electron.exe dist/main.js" 
 to : "launch-electron": "node_modules/electron/dist/electron.exe --inspect-brk dist/main.js"
 
-## See also
-* [React Webpack Babel Starter](https://github.com/vikpe/react-webpack-babel-starter)
-* [Isomorphic Webapp Starter](https://github.com/vikpe/isomorphic-webapp-starter)
