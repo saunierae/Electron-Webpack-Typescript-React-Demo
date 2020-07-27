@@ -23,7 +23,7 @@ Users use a form to create custom journal forms for desired journals.
 2. Run `./build.ps1`to launch application
 3. Select Create Journal Template
 4. Type in journal name 
-5. select Edit next to the journal name
+5. Select Edit next to the journal name
 6. Click the dropdown to select the type for the section
 7. Type in the section Name
 8. Click add item
