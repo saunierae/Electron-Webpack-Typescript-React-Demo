@@ -3,21 +3,8 @@ import {useImage} from "react-image";
 import { useHistory } from "react-router-dom";
 // import tutorialimg from "../tutorialimg.png";
 
+// Display tutorial information
 function Tutorial() {
-
-     const Item = () => {
-        let history = useHistory();
-      };
-
-    //   function MyImageComponent() {
-    //       const {src} = useImage({
-    //           srcList: 
-    //       })
-    //   }
-    //   function Header() {
-    //       return <img src={require{tutorialimg.default}} className="tutorialimg" alt="tutorialimg"/>
-    //   }
-
     return (
         <div>
             <h1>Tutorial</h1>

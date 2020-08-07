@@ -1,5 +1,5 @@
 import fs from "fs"; 
-import {app, BrowserWindow, Dialog, IpcMain, ipcMain} from "electron";
+import {app, BrowserWindow, ipcMain} from "electron";
 import * as path from "path";
 
 // Keep a global reference of the window object, otherwise it will be garbage collected.
@@ -19,7 +19,6 @@ function createWindow () {
         webPreferences: {
             nodeIntegration: true
         },
-        //icon: `${path.join(__dirname, 'favicon.ico')}`,
         show: false
     });
 
@@ -43,17 +42,17 @@ function createWindow () {
     });
 
     // Shows the window
-    mainWindow.show();
+    // mainWindow.show();
     // This helps in showing the window gracefully, but was causing issues with mine
-    // mainWindow.once('ready-to-show', () => {
-    //     if(mainWindow != null) {
-    //         mainWindow.show()
-    //     }
-    // });
+    mainWindow.once('ready-to-show', () => {
+        if(mainWindow != null) {
+            mainWindow.show()
+        }
+    });
 
+    // Save information to disk
     ipcMain.on("save", (event, args) => {
         try {
-            //fs.writeFileSync('myfile.txt', 'the text to write in the file', 'utf-8'); 
             fs.writeFileSync(args[0], args[1], 'utf-8');
             event.returnValue = null;
             console.log("args: " + args);
@@ -62,34 +61,20 @@ function createWindow () {
     catch(e) { alert('Failed to save the file !'); 
     }})
 
+    // Read in information from disk
     ipcMain.on("read", (event, args) => {
-        // dialog.showOpenDialog((fileNames) => {
-        //     // fileNames is an array that contains all the selected
-        //     if(fileNames === undefined){
-        //         console.log("No file selected");
-        //         return;
-        //     }
-        //var returnData;
         let fileName = args;
         console.log(fileName);        
         try{
             fs.readFile(fileName, 'utf-8', (err, data) => {
-                // if(err){
-                //     alert("An error ocurred reading the file :" + err.message);
-                //     return;
-                // }
-                //returnData = data;
                 if (data) {
                     event.returnValue=JSON.parse(data);
                 }
                 else {
                     event.returnValue={journals: []};
                 }
-                // Change how to handle the file content
                 console.log("The file content is : " + data);
             });
-
-            
         }
         catch(e)
         {
@@ -97,7 +82,7 @@ function createWindow () {
         }
         })}
 
-// Electrong completes initializing and is ready to create browser windows.
+// Electron completes initializing and is ready to create browser windows.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
