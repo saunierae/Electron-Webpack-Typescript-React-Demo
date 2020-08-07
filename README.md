@@ -19,8 +19,19 @@ Users use a form to create custom journal forms for desired journals.
 ## Usage
 **Development**
 
-1. Change directory to electron
+1. Change directory to the electron folder
 2. Run `./build.ps1`to launch application
+3. Select Create Journal Template
+4. Type in journal name 
+5. Select Edit next to the journal name
+6. Click the dropdown to select the type for the section
+7. Type in the section Name
+8. Click add item
+9. Update the text to display the labels or questions desired for the items
+10. Repeat steps 6-9 until desired journal template is complete
+11. Click complete Journal
+12. Click Go to Journal
+13. Fill out the custom journal
 
 
 * App served @ `http://localhost:8080`
@@ -56,6 +67,3 @@ Command | Description
 from "launch-electron": "node_modules/electron/dist/electron.exe dist/main.js" 
 to : "launch-electron": "node_modules/electron/dist/electron.exe --inspect-brk dist/main.js"
 
-## See also
-* [React Webpack Babel Starter](https://github.com/vikpe/react-webpack-babel-starter)
-* [Isomorphic Webapp Starter](https://github.com/vikpe/isomorphic-webapp-starter)
