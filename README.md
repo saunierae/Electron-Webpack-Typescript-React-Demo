@@ -1,4 +1,4 @@
-# React Webpack Typescript Electron Journal Applciation
+# React Webpack Typescript Electron Journal Application
 
 Users use a form to create custom journal forms for desired journals.
 
