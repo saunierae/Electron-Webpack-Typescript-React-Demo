@@ -1,3 +1,4 @@
-Validation testing for text input.
-Button Links
-Dropdown buttons
+File creation was tested by deleting the current file and ensuring that a new one is created
+Error handling was added if the file could not be read.
+Button Links were tested to ensure they navigate to the correct route
+Dropdown buttons were tested to ensure they mark the correct selection
