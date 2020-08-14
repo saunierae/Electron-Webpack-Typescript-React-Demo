@@ -44,7 +44,7 @@ export class JournalEntriesListComponent extends React.Component <JournalEntries
         const viewEntries =
             this.props.journal.journalEntries.map((entry, entryId) => {
                 return <React.Fragment> 
-                    <div>
+                    <div className="journalEntries">  
                     <JournalEntryComponent 
                         key={entryId} 
                         journal={this.props.journal}
@@ -64,9 +64,12 @@ export class JournalEntriesListComponent extends React.Component <JournalEntries
         return (
             <div>
                 <h1>{this.props.journal.name}</h1> 
-                <button className="center" onClick={e => this.props.addJournalEntry(this.props.journalId, this.createEmptyJournalEntry())}>Add Entry</button>
-                {/* {entryName} */}
-                {viewEntries}
+                <div>
+                    <button className="journals" onClick={e => this.props.addJournalEntry(this.props.journalId, this.createEmptyJournalEntry())}>Add Entry</button>
+                </div>
+                <div className="journals">
+                    {viewEntries}
+                </div>
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )

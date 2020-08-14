@@ -59,52 +59,71 @@ export class EditJournalTemplateComponent extends React.Component <EditJournalTe
         const viewSections = this.props.journal.sections.map((section, sectionId) => { 
             // Create a map of created items to display
             const items = section.items.map((item, itemId) => {
-                return <EditItem 
+                return <div className="item"> <EditItem 
                     key={itemId} 
                     sectionId={sectionId} 
                     itemId={itemId} 
                     item={item} 
                     editItemName={this.editItemName} 
                 />
+                </div>
              })
 
             return <React.Fragment>
-                <EditSection 
-                    key={sectionId} 
-                    sectionId={sectionId} 
-                    section={section} 
-                    editSectionName={this.editSectionName}
-                />
-                <button
-                    onClick={() => this.props.deleteSection(this.props.journalId, sectionId)}>Delete
-                </button>
-                <button 
-                    onClick={() => this.props.additem(this.props.journalId, sectionId)}>Add Item
-                </button>
-                {items}
+                <div className="section">
+                    <EditSection 
+                        key={sectionId} 
+                        sectionId={sectionId} 
+                        section={section} 
+                        editSectionName={this.editSectionName}  
+                    />
+                    <button
+                        onClick={() => this.props.deleteSection(this.props.journalId, sectionId)}>Delete
+                    </button> 
+                    <button 
+                        onClick={() => this.props.additem(this.props.journalId, sectionId)}>Add Item
+                    </button>
+                    {items}
+                    </div>
             </React.Fragment> 
         })
 
         // Always display the following
         return (
             <div>
-                <div> 
-                    Select Drop Down
-                    <form>
+                <h1>Create Sections and Items for the Journal</h1>
+                <div className="instructions"> 
+                    <ol>
+                        <li>Select Drop Down for the desired section type</li>
+                        <li>Click add sections</li>
+                        <li>Label the section</li>
+                        <li>Click add item for the section</li>
+                        <li>Label the item</li>
+                        <li>To add more sections, repeat the above steps until the desired journal is completed</li>
+                        <li>Select the "Complete Journal Template to finialize the journal" then select return</li>
+                        <p>Note: The sectons will need to ahve a matching input for all types, otherwise you will want to create a new section</p>
+                    </ol>
+                </div>
+                <div>
+                    <form className="selection">
                         <select value={this.state.sectionType} onChange={this.onChangeSectionType} id="type">
                             <option value="checkbox">Checkbox</option>
                             <option value="freeform">Freeform</option>
                         </select>
                     </form>
                 </div>
-                {viewSections}
-                <div>
-                    <button onClick={() => this.props.addSection(this.props.journalId, this.state.sectionType)}>Add Another Section</button>
+                <div className="sectionButton">
+                    <button onClick={() => this.props.addSection(this.props.journalId, this.state.sectionType)}>Add Section</button>
+                </div>
+                <div className="sectionItems">
+                    {viewSections}
                 </div>
                 <div>
-                   <button onClick={this.onFinalizeJournal}>Complete Journal Template</button>
+                   <button className="complete" onClick={this.onFinalizeJournal}>Complete Journal Template</button>
                 </div>
-                <button onClick={() => history.back()}>Back</button>
+                <div>
+                    <button className="bottomRow" onClick={() => history.back()}>Return</button>
+                </div>
             </div>
         )
     }

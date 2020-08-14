@@ -31,6 +31,7 @@ export class JournalTemplateListComponent extends React.Component <JournalTempla
                 null: 
                 <button onClick={() => this.props.editJournal(journalId)}>Edit</button>
            return <React.Fragment> 
+               <div className="journals">
                 <EditJournal 
                     key={journalId} 
                     journalId={journalId} 
@@ -42,6 +43,7 @@ export class JournalTemplateListComponent extends React.Component <JournalTempla
                     onClick={() => this.props.deleteJournal(journalId)}>Delete
                 </button>
                 {editButton}
+                </div>
             </React.Fragment> 
         })
         // Always show the following options
@@ -49,8 +51,8 @@ export class JournalTemplateListComponent extends React.Component <JournalTempla
             <div>
                 <h1>Current Journals</h1>
                 {journals}
-                <button className="center" onClick={e => this.props.addJournal()}>Create Journal Template</button>
-                <button className="centerRow2" onClick={e => this.props.onTutorialSelected()}>View Tutorial</button>
+                <button className="top1" onClick={e => this.props.addJournal()}>Create Journal Template</button>
+                <button className="top2" onClick={e => this.props.onTutorialSelected()}>View Tutorial</button>
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
         )

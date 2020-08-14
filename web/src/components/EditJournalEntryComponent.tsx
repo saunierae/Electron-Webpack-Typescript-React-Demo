@@ -21,21 +21,24 @@ export class EditJournalEntryComponent extends Component <EditJournalEntryCompon
             const items = sectionEntry.itemEntries.map((item, itemEntryIndex) => {
                 const itemName = this.props.journal.sections[sectionEntryIndex].items[itemEntryIndex].label
                 const itemInput = sectionType === "checkbox" ? 
-                    <input 
-                        type="checkbox" 
-                        checked={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as boolean}
-                        onChange={
-                            e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.checked)}>
+                        <input 
+                            type="checkbox" 
+                            className="checkbox" 
+                            checked={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as boolean}
+                            onChange={
+                                e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.checked)}>
 
-                    </input>:
-                    <input 
-                        type="text" 
-                        value={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as string}
-                        onChange={
-                            e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.value)}>
+                        </input>:
+                    <div>
+                        <input 
+                            type="text" 
+                            className="textInput"
+                            value={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as string}
+                            onChange={
+                                e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.value)}>
 
-                    </input>
-                     
+                        </input>
+                     </div>
                 return (
                     <div key={itemEntryIndex}>
                         {itemName}

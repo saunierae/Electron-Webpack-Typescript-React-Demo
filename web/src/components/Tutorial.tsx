@@ -10,19 +10,14 @@ function Tutorial() {
             <h1>Tutorial</h1>
             <h2>How it works:</h2>
             <ol>
-                <li>Select add a secton</li>
-                <li>Fill out the prompts in the new window that will appear for the number of questions or labels you would like</li>
-                <li>Select the input type</li>
-                <p>Note: The sectons will need to ahve a matching question/lable and input for all types, otherwise you will want to create a new section</p>
-                <li>Select Complete Section</li>
-                <li>View the current template to see the layout of all of the sections created for your journal</li>
-                <li>Select Complete Journal Template when you are satisified with your Template</li>
-            </ol>
-            <h2>To Remove sections:</h2>
-            <ol>
-                <li>Select the Delete Section</li>
-                <li>Click on the section to be removed</li>
-                <li>Click yes to remove the section</li>
+                <li>Select Drop Down for the desired section type</li>
+                <li>Click add sections</li>
+                <li>Label the section</li>
+                <li>Click add item for the section</li>
+                <li>Label the item</li>
+                <li>To add more sections, repeat the above steps until the desired journal is completed</li>
+                <li>Select the "Complete Journal Template to finialize the journal" then select return</li>
+                <p>Note: The sectons will need to ahve a matching input for all types, otherwise you will want to create a new section</p>
             </ol>
             <img src="tutorialImage.png" className="Example" alt="Example"/>
             <button className="bottomRow" onClick={() => history.back()}>Back</button>
