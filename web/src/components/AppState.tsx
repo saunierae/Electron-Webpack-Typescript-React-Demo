@@ -147,7 +147,7 @@ export const updateEntryValue = (appState: AppState, journalId: number, journalE
   const newSections: SectionEntry[] = [...appState.journals[journalId].journalEntries[journalEntryId].sectionEntries]
   newSections[sectionEntryId] = {...newSections[sectionEntryId], itemEntries: newItems}
   const newEntryValue: JournalEntry = {...appState.journals[journalId].journalEntries[journalEntryId], sectionEntries: newSections};
-  return updateEntry(appState, journalId, entryItemId, newEntryValue)
+  return updateEntry(appState, journalId, journalEntryId, newEntryValue)
 }
 
 //Edit Section Name

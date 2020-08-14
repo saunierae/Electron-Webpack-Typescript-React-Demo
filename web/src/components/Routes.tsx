@@ -140,22 +140,13 @@ export class Routes extends React.Component<{}, RoutesState> {
     this.forceUpdate();
   }
 
-
-
   // Render the routes
   render() {
     const searchParams = new URLSearchParams(window.location.search); 
-
- 
-
     return (
       <div>
         <HashRouter>
-          {/* <Link to="/" className="button">Create Journal Template</Link>
-          <Link to="/EditJournalForm" className="button">Edit Journal</Link> */}
           <Switch>
-           
-            
             <Route path="/EditJournalForm">
               <EditJournalTemplateComponent
                 journal={this.state.appState.journals[this.state.journalId]}

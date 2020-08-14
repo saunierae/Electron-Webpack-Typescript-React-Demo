@@ -27,7 +27,6 @@ export class EditJournalEntryComponent extends Component <EditJournalEntryCompon
                             checked={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as boolean}
                             onChange={
                                 e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.checked)}>
-
                         </input>:
                     <div>
                         <input 
@@ -36,7 +35,6 @@ export class EditJournalEntryComponent extends Component <EditJournalEntryCompon
                             value={this.props.journal.journalEntries[this.props.entryId].sectionEntries[sectionEntryIndex].itemEntries[itemEntryIndex] as string}
                             onChange={
                                 e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.value)}>
-
                         </input>
                      </div>
                 return (

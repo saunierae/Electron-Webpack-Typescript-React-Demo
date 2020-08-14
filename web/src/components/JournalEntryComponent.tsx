@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Journal, JournalEntry, ItemEntry } from './AppState'
-import { EditEntry } from './EditEntry'
-import JournalEntriesListComponent from './JournalEntriesListComponent'
 
 // Create props for editing entries
 type JournalEntryComponentProps = {
@@ -19,7 +17,6 @@ export class JournalEntryComponent extends React.Component <JournalEntryComponen
     onEntrySelected = () => {
         this.props.entrySelected(this.props.journalId, this.props.entryId)
     }
-    
     
     render() {
         return (

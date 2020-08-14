@@ -57,8 +57,7 @@ export class JournalEntriesListComponent extends React.Component <JournalEntries
                         onClick={() => this.props.deleteEntry(this.props.journalId, entryId)}>Delete
                     </button>
                     </div>
-                </React.Fragment>
-                
+                </React.Fragment> 
             })
 
         return (
@@ -67,7 +66,7 @@ export class JournalEntriesListComponent extends React.Component <JournalEntries
                 <div>
                     <button className="journals" onClick={e => this.props.addJournalEntry(this.props.journalId, this.createEmptyJournalEntry())}>Add Entry</button>
                 </div>
-                <div className="journals">
+                <div className="journalEntries">
                     {viewEntries}
                 </div>
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>

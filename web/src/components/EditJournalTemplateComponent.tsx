@@ -94,14 +94,14 @@ export class EditJournalTemplateComponent extends React.Component <EditJournalTe
                 <h1>Create Sections and Items for the Journal</h1>
                 <div className="instructions"> 
                     <ol>
-                        <li>Select Drop Down for the desired section type</li>
-                        <li>Click add sections</li>
-                        <li>Label the section</li>
-                        <li>Click add item for the section</li>
-                        <li>Label the item</li>
-                        <li>To add more sections, repeat the above steps until the desired journal is completed</li>
-                        <li>Select the "Complete Journal Template to finialize the journal" then select return</li>
-                        <p>Note: The sectons will need to ahve a matching input for all types, otherwise you will want to create a new section</p>
+                    <li>Select Drop Down for the desired section type</li>
+                    <li>Click add sections</li>
+                    <li>Label the section</li>
+                    <li>Click add item for the section</li>
+                    <li>Label the item</li>
+                    <li>To add more sections, repeat the above steps until the desired journal is completed</li>
+                    <li>Select the "Complete Journal Template to finialize the journal" then select return</li>
+                    <p>Note: The sectons will need to ahve a matching input for all types, otherwise you will want to create a new section</p>
                     </ol>
                 </div>
                 <div>
