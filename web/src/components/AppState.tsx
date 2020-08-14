@@ -1,7 +1,7 @@
 //create and export data types
 export type ItemType = "checkbox" | "freeform" 
 export type AppState = {journals: Journal[]}
-export type Journal = {name: string, sections: Section[], finalized: boolean, entries: JournalEntry[]}
+export type Journal = {name: string, sections: Section[], finalized: boolean, journalEntries: JournalEntry[]}
 export type Section = {name: string, itemType: ItemType, items: SectionItem[]}
 export type SectionItemBase = {label: string}
 export type SectionItem = SectionItemBase;
@@ -24,9 +24,9 @@ export const addJournal = (appState: AppState, journal: Journal): AppState => {
 
  //Add Journal Entry
 export const addJournalEntry = (appState: AppState, journalId: number, entryInfo: JournalEntry): AppState => {
-  const newEntries: JournalEntry[] = [...appState.journals[journalId].entries, entryInfo];
-  const newJournal = {...appState.journals[journalId], 
-    entries: newEntries
+  const newEntries: JournalEntry[] = [...appState.journals[journalId].journalEntries, entryInfo];
+  const newJournal: Journal = {...appState.journals[journalId], 
+    journalEntries: newEntries
   }
   return updateJournal(appState, journalId, newJournal)
 }
@@ -40,9 +40,10 @@ export const deleteJournal = (appState: AppState, journalId: number): AppState =
 
   //Delete Journals
 export const deleteEntry = (appState: AppState, journalId: number, entryId: number): AppState => {
-  const newJournals = [...appState.journals];
-  newJournals.splice(entryId, 1);
-  return {journals: newJournals}
+  const newEntries = [...appState.journals[journalId].journalEntries];
+  newEntries.splice(entryId, 1);
+  const newJournal = {...appState.journals[journalId], journalEntries: newEntries}
+  return updateJournal(appState, journalId, newJournal)
 }
 
 //reusable code 1
@@ -81,10 +82,10 @@ const updateItem = (appState: AppState, journalId: number, sectionId: number, it
 //Reusable code 4
 // Helper function to update sections
 const updateEntry = (appState: AppState, journalId: number, entryId: number, entry: JournalEntry): AppState => {
-  const newEntries = [...appState.journals[journalId].entries];
+  const newEntries = [...appState.journals[journalId].journalEntries];
   newEntries[entryId] = entry;
-  const newJournal = {...appState.journals[journalId],
-    entries: newEntries
+  const newJournal: Journal = {...appState.journals[journalId],
+    journalEntries: newEntries
   }
   return updateJournal(appState, journalId, newJournal)
 }
@@ -140,12 +141,12 @@ export const editItemName = (appState: AppState, journalId: number, sectionId: n
 }
 
 //Edit entry data
-export const updateEntryValue = (appState: AppState, journalId: number, entryId: number, sectionEntryId: number, entryItemId: number, value: ItemEntry): AppState => {
-  const newItems: ItemEntry[] = [...appState.journals[journalId].entries[entryId].sectionEntries[sectionEntryId].itemEntries];
+export const updateEntryValue = (appState: AppState, journalId: number, journalEntryId: number, sectionEntryId: number, entryItemId: number, value: ItemEntry): AppState => {
+  const newItems: ItemEntry[] = [...appState.journals[journalId].journalEntries[journalEntryId].sectionEntries[sectionEntryId].itemEntries];
   newItems[entryItemId] = value
-  const newSections: SectionEntry[] = [...appState.journals[journalId].entries[entryId].sectionEntries]
+  const newSections: SectionEntry[] = [...appState.journals[journalId].journalEntries[journalEntryId].sectionEntries]
   newSections[sectionEntryId] = {...newSections[sectionEntryId], itemEntries: newItems}
-  const newEntryValue: JournalEntry = {...appState.journals[journalId].entries[entryId], sectionEntries: newSections};
+  const newEntryValue: JournalEntry = {...appState.journals[journalId].journalEntries[journalEntryId], sectionEntries: newSections};
   return updateEntry(appState, journalId, entryItemId, newEntryValue)
 }
 

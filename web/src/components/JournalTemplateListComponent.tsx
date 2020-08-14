@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Redirect, useHistory } from "react-router-dom";
 import {Journal} from "./AppState";
-import { EditJournalForm } from "./EditJournalForm";
 import { EditJournal } from "./EditJournal";
 
 // Create properties for the journal template
-type CreateJournalTemplateProps = {
+type JournalTemplateListComponentProps = {
     journals: Journal[],
     journalId: number,    
     journal: Journal,
@@ -18,7 +16,7 @@ type CreateJournalTemplateProps = {
 }
 
 //Create the class for Journal Template
-export class CreateJournalTemplate extends React.Component <CreateJournalTemplateProps>{
+export class JournalTemplateListComponent extends React.Component <JournalTemplateListComponentProps>{
 
     //edit journal name for selected journal
     editJournalName = (journalId: number, value: string ) => {
@@ -59,6 +57,6 @@ export class CreateJournalTemplate extends React.Component <CreateJournalTemplat
     }
 }
 
-export default CreateJournalTemplate
+export default JournalTemplateListComponent
 
 

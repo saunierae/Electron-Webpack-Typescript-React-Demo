@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useImage} from "react-image";
 import { useHistory } from "react-router-dom";
-// import tutorialimg from "../tutorialimg.png";
+
 
 // Display tutorial information
 function Tutorial() {
@@ -24,7 +24,7 @@ function Tutorial() {
                 <li>Click on the section to be removed</li>
                 <li>Click yes to remove the section</li>
             </ol>
-            {/* <img src={require{tutorialimg.default}} className="Example" alt="Example"/> */}
+            <img src="tutorialImage.png" className="Example" alt="Example"/>
             <button className="bottomRow" onClick={() => history.back()}>Back</button>
         </div>
     )

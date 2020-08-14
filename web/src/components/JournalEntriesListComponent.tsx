@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { Journal, FreeformData, CheckBox, JournalEntry, SectionEntry } from "./AppState" 
+import { Journal, JournalEntry, SectionEntry, ItemEntry } from "./AppState" 
 import { assertNeverHit } from './Utilities';
-import { EditEntries } from './EditEntries';
+import { JournalEntryComponent } from './JournalEntryComponent';
+import { EditEntry } from './EditEntry';
 
 // Create Journal Entry Props
-type JournalEntriesProps = {
+type JournalEntriesComponentProps = {
     journal: Journal, 
     journalId: number,
-    entryId: number,
     deleteEntry: (journalId: number, entryId: number) => void,
     addJournalEntry: (journalId: number, entry: JournalEntry) => void,
     entrySelected: (journalId: number, entryId: number) => void,
 }
 
 // Create Class for Journal Entries View page
-export class JournalEntriesView extends React.Component <JournalEntriesProps>{
+export class JournalEntriesListComponent extends React.Component <JournalEntriesComponentProps>{
     // Create an empty journal entry for selected case
     createEmptyJournalEntry = () => {
         const sectionEntries: SectionEntry[] = this.props.journal.sections.map(section => {
@@ -41,10 +41,11 @@ export class JournalEntriesView extends React.Component <JournalEntriesProps>{
     
     render() {
         // Show entries if the entries exist    
-        const viewEntries = this.props.journal.entries.length > 0 ? 
-            this.props.journal.entries.map((entry, entryId) => {
+        const viewEntries =
+            this.props.journal.journalEntries.map((entry, entryId) => {
                 return <React.Fragment> 
-                    <EditEntries 
+                    <div>
+                    <JournalEntryComponent 
                         key={entryId} 
                         journal={this.props.journal}
                         journalId={this.props.journalId}
@@ -55,8 +56,10 @@ export class JournalEntriesView extends React.Component <JournalEntriesProps>{
                     <button
                         onClick={() => this.props.deleteEntry(this.props.journalId, entryId)}>Delete
                     </button>
+                    </div>
                 </React.Fragment>
-            }): null
+                
+            })
 
         return (
             <div>
@@ -70,4 +73,4 @@ export class JournalEntriesView extends React.Component <JournalEntriesProps>{
     }
 }
 
-export default JournalEntriesView
+export default JournalEntriesListComponent

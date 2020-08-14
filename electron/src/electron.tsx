@@ -42,13 +42,13 @@ function createWindow () {
     });
 
     // Shows the window
-    // mainWindow.show();
+    mainWindow.show();
     // This helps in showing the window gracefully, but was causing issues with mine
-    mainWindow.once('ready-to-show', () => {
-        if(mainWindow != null) {
-            mainWindow.show()
-        }
-    });
+    // mainWindow.once('ready-to-show', () => {
+    //     if(mainWindow != null) {
+    //         mainWindow.show()
+    //     }
+    // });
 
     // Save information to disk
     ipcMain.on("save", (event, args) => {

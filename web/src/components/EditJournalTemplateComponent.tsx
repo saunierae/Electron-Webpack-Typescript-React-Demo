@@ -6,11 +6,9 @@ import { EditSection } from "./EditSection";
 import { EditItem } from "./EditItem";
 
 // Create Props for the Journal Form
-type EditJournalFormProps = {
+type EditJournalTemplateComponentProps = {
     journalId: number,    
     journal: Journal,
-    sectionId: number,
-    itemId: number,
     addSection: (journalId: number, type: ItemType) => void,
     additem: (journalId: number, sectionId: number) => void,
     deleteSection: (journalId: number, sectionId: number) => void,
@@ -21,12 +19,12 @@ type EditJournalFormProps = {
 }
 
 // Create a state for the item type selected
-type EditJournalFormState = {
+type EditJournalTemplateComponentState = {
     sectionType: ItemType,
 }
 
 // Create a class for editing the form taking in props and state
-export class EditJournalForm extends React.Component <EditJournalFormProps, EditJournalFormState> {
+export class EditJournalTemplateComponent extends React.Component <EditJournalTemplateComponentProps, EditJournalTemplateComponentState> {
     private nextID: number = 0;
     constructor(props) {
         super(props)
