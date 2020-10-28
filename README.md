@@ -1,6 +1,6 @@
 # React Webpack Typescript Electron Journal Application
 
-Users use a form to create custom journal forms for desired journals.
+Electron application that allows users to have modular journals to create a one stop location for all of their journaling needs. Some examples are Mindfulness journals, Food journals, and Exercise journals. The journal UI is presented in React along with storing the state of the components. This should help reduce bugs and makes testing more predictable. 
 
 * **[Electron](https://www.electronjs.org/)** (9.x)
 * **[React](https://facebook.github.io/react/)** (16.x)
