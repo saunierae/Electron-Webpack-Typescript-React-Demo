@@ -67,3 +67,5 @@ Command | Description
 from "launch-electron": "node_modules/electron/dist/electron.exe dist/main.js" 
 to : "launch-electron": "node_modules/electron/dist/electron.exe --inspect-brk dist/main.js"
 
+## Video Walk Through
+https://drive.google.com/file/d/1GKqRv1FI3UMHNRhbZkmh7l65ozK_iqrb/view?usp=sharing
