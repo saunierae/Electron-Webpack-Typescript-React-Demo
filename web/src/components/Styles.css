@@ -1,3 +1,19 @@
+  body {
+    height:100%;
+  }
+
+  #root {
+    height:100%;
+  }
+
+  html {
+    height:100%;
+  }
+
+  .component-div {
+    height:100%;
+  }
+
   .journals {
     display: flex;
     justify-content: flex-end;

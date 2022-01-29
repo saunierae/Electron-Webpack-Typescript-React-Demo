@@ -29,7 +29,7 @@ function createWindow () {
     // } else {
         //Do not delete this statement, Use this piece of code when packaging app for production environment
         console.log(__dirname);
-        mainWindow.loadFile(`${path.join(__dirname, '../../web/dist/index.html')}`);
+        mainWindow.loadFile(`${path.join(__dirname, './web/index.html')}`);
     // }
 
     // Open the DevTools and also disable Electron Security Warning.

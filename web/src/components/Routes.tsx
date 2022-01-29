@@ -144,7 +144,7 @@ export class Routes extends React.Component<{}, RoutesState> {
   render() {
     const searchParams = new URLSearchParams(window.location.search); 
     return (
-      <div>
+      <div className="component-div">
         <HashRouter>
           <Switch>
             <Route path="/EditJournalForm">

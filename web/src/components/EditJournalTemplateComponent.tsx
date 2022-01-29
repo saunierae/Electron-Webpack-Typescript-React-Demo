@@ -70,7 +70,7 @@ export class EditJournalTemplateComponent extends React.Component <EditJournalTe
              })
 
             return <React.Fragment>
-                <div className="section">
+                <div className="section component-div">
                     <EditSection 
                         key={sectionId} 
                         sectionId={sectionId} 
@@ -90,7 +90,7 @@ export class EditJournalTemplateComponent extends React.Component <EditJournalTe
 
         // Always display the following
         return (
-            <div>
+            <div className="component-div">
                 <h1>Create Sections and Items for the Journal</h1>
                 <div className="instructions"> 
                     <ol>

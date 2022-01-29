@@ -48,12 +48,12 @@ export class JournalTemplateListComponent extends React.Component <JournalTempla
         })
         // Always show the following options
         return (
-            <div>
+            <div className="component-div">
                 <h1>Current Journals</h1>
                 {journals}
                 <button className="top1" onClick={e => this.props.addJournal()}>Create Journal Template</button>
                 <button className="top2" onClick={e => this.props.onTutorialSelected()}>View Tutorial</button>
-                <button className="bottomRow" onClick={() => history.back()}>Back</button>
+                <button className="bottomRow component-div" onClick={() => history.back()}>Back</button>
             </div>
         )
     }

@@ -23,7 +23,7 @@ export class EditEntry extends React.Component <EditEntryProps> {
     // Always display
     render() {
         return (
-            <div>
+            <div className="component-div">
                 <input value={this.props.entryItem.toString()} onChange={ this.editEntryValue }></input>
             </div>
         )

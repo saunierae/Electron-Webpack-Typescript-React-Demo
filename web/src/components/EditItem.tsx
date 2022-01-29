@@ -20,7 +20,7 @@ export class EditItem extends React.Component <EditItemProps> {
     // Always display
     render() {
         return (
-            <div>
+            <div className="component-div">
                 <input value={this.props.item.label} onChange={ this.editItemName }></input>
             </div>
         )

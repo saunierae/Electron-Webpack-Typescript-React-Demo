@@ -61,7 +61,7 @@ export class JournalEntriesListComponent extends React.Component <JournalEntries
             })
 
         return (
-            <div>
+            <div className="component-div">
                 <h1>{this.props.journal.name}</h1> 
                 <div>
                     <button className="journals" onClick={e => this.props.addJournalEntry(this.props.journalId, this.createEmptyJournalEntry())}>Add Entry</button>

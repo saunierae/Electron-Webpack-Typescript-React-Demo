@@ -19,7 +19,7 @@ export class EditSection extends React.Component <EditSectionProps> {
     // Always render
     render() {
         return (
-            <div>
+            <div className="component-div"> 
                 <input value={this.props.section.name} onChange={ this.editSectionName }></input>
             </div>
         )

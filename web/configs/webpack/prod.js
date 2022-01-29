@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
     minimize: false,
   },
   entry: [
-    './index.tsx',
+    './index.tsx'
   ],
   output: {
     path: resolve(__dirname, '../../dist'),

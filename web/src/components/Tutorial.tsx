@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 // Display tutorial information
 function Tutorial() {
     return (
-        <div>
+        <div className="component-div">
             <h1>Tutorial</h1>
             <h2>How it works:</h2>
             <ol>

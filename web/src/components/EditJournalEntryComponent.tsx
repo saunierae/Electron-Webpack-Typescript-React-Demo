@@ -28,7 +28,7 @@ export class EditJournalEntryComponent extends Component <EditJournalEntryCompon
                             onChange={
                                 e => this.props.updateEntryValue(this.props.journalId, this.props.entryId, sectionEntryIndex, itemEntryIndex, e.target.checked)}>
                         </input>:
-                    <div>
+                    <div className="component-div">
                         <input 
                             type="text" 
                             className="textInput"
@@ -53,7 +53,7 @@ export class EditJournalEntryComponent extends Component <EditJournalEntryCompon
             )
         })
         return (
-            <div>
+            <div className="component-div">
                 {journalSections}
                 <button className="bottomRow" onClick={() => history.back()}>Back</button>
             </div>
